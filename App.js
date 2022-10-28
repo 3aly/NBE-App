@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     flexDirection: 'column',
     alignContent: 'center',
+    color: 'white',
   },
 });
 
