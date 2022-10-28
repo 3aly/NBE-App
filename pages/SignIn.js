@@ -8,52 +8,19 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-
+import {
+  StyledButton,
+  StyledInput,
+  ButtonContianer,
+  Row,
+  Column,
+} from '../components/StyledComponents';
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 
-const StyledInput = styled(TextInput)`
-  background-color: red;
-  width: 85%;
-  margin: 3%;
-  padding: 4%;
-  border: 1.5px solid;
-  border-radius: 10px;
-`;
-const Column = styled(View)`
-  display: flex;
-  flex-direction: column;
-  margin: 2%;
-  align-items: center;
-`;
-const StyledButton = styled(TouchableOpacity)`
-  background-color: #007236;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 80%;
-  border-radius: 12.5px;
-  align-items: center;
-  justify-content: center;
-`;
-const Row = styled(View)`
-  display: flex;
-  flex-direction: row;
-  margin: 2%;
-  justify-content: space-between;
-`;
-const ButtonContianer = styled(View)`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0% 10%;
-  text-align: end;
-`;
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
   return (
     <ImageBackground
@@ -72,6 +39,7 @@ const SignIn = () => {
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.3)',
               borderColor: 'rgba(255, 255, 255, 0.5)',
+              width: 320,
             }}
             placeholder={'Username'}
             placeholderTextColor="#ffff"
@@ -80,28 +48,42 @@ const SignIn = () => {
             style={{
               backgroundColor: 'white',
               borderColor: '#007236',
+              width: 320,
             }}
             placeholder={'Password'}
             placeholderTextColor="#007236"
           />
-          <Row style={{width: 320, color: 'white', alignItems: 'center'}}>
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isSelected}
-                onValueChange={setSelection}
-                style={styles.checkbox}
-              />
-              <Text style={styles.label}>Remember me</Text>
-            </View>
-            <Text style={styles.label}>Forgot password?</Text>
-          </Row>
         </Column>
+
+        <Row
+          style={{
+            width: 320,
+            color: 'white',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              value={isSelected}
+              onValueChange={setSelection}
+              style={styles.checkbox}
+            />
+            <Text style={styles.label}>Remember me</Text>
+          </View>
+          <Text style={styles.label}>Forgot password?</Text>
+        </Row>
         <ButtonContianer>
-          <StyledButton>
+          <StyledButton onPress={() => navigation.navigate('finish')}>
             <Text style={styles.buttontext}>Log In</Text>
           </StyledButton>
           <Image source={require('../assets/register.png')} />
         </ButtonContianer>
+        <Row>
+          <Text style={styles.buttontext}>
+            Don’t have an account?{' '}
+            <Text style={{color: '#F6A721'}}>Sign up</Text>
+          </Text>
+        </Row>
       </View>
     </ImageBackground>
   );
@@ -115,10 +97,11 @@ const styles = StyleSheet.create({
   contianer: {
     flex: 1,
     backgroundColor: ' rgba(0, 0, 0, 0.6)',
+    alignItems: 'center',
   },
 
   title: {
-    flex: 0.6,
+    flex: 0.9,
     fontSize: 1,
     justifyContent: 'space-between',
     marginTop: 30,

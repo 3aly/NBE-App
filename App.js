@@ -6,6 +6,10 @@
  * @flow strict-local
  */
 
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import React from 'react';
 import {Node} from 'react';
 import {
@@ -17,6 +21,7 @@ import {
   useColorScheme,
   View,
   ImageBackground,
+  Image,
 } from 'react-native';
 import {
   Colors,
@@ -25,23 +30,36 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import SignIn from './components/SignIn';
+import Finish from './pages/finish';
+import SignIn from './pages/SignIn';
+import SplashScreen from './pages/SplashScreen';
+import {Nav} from './infrastructure/index';
+import {AppNavigator} from './infrastructure/app.navigator';
 
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
+import {createStackNavigator} from '@react-navigation/stack';
+import {useState} from 'react';
+const AuthStack = createStackNavigator();
 
 const App = () => {
+  console;
   return (
-    <View style={styles.container}>
-      <SignIn />
-    </View>
+    <>
+      <NavigationContainer>
+        <AuthStack.Navigator headerMode="none">
+          <AuthStack.Screen name="Splash" component={SplashScreen} />
+
+          <AuthStack.Screen name="Sign-in" component={SignIn} />
+          <AuthStack.Screen name="finish" component={Finish} />
+          <AuthStack.Screen name="all" component={Nav} />
+        </AuthStack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
     flexDirection: 'column',
     alignContent: 'center',
     color: 'white',
