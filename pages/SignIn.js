@@ -6,7 +6,9 @@ import {
   Image,
   TextInput,
   Button,
+  Modal,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import {
   StyledButton,
@@ -19,7 +21,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
-
 const SignIn = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
   return (
@@ -76,7 +77,9 @@ const SignIn = ({navigation}) => {
           <StyledButton onPress={() => navigation.navigate('finish')}>
             <Text style={styles.buttontext}>Log In</Text>
           </StyledButton>
-          <Image source={require('../assets/register.png')} />
+          <TouchableOpacity onPress={() => navigation.navigate('FP')}>
+            <Image source={require('../assets/register.png')} />
+          </TouchableOpacity>
         </ButtonContianer>
         <Row>
           <Text style={styles.buttontext}>
@@ -98,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: ' rgba(0, 0, 0, 0.6)',
     alignItems: 'center',
+    flexDirection: 'column',
   },
 
   title: {

@@ -38,6 +38,7 @@ import {AppNavigator} from './infrastructure/app.navigator';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {useState} from 'react';
+import FingerprintScreen from './pages/FingerprintScreen';
 const AuthStack = createStackNavigator();
 
 const App = () => {
@@ -45,8 +46,9 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <AuthStack.Navigator headerMode="none">
+        <AuthStack.Navigator screenOptions={{headerShown: false}}>
           <AuthStack.Screen name="Splash" component={SplashScreen} />
+          <AuthStack.Screen name="FP" component={FingerprintScreen} />
 
           <AuthStack.Screen name="Sign-in" component={SignIn} />
           <AuthStack.Screen name="finish" component={Finish} />

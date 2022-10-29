@@ -65,15 +65,10 @@ export const AppNavigator = () => {
             options={{
               tabBarIcon: ({focused}) => (
                 <View
-                  style={{
-                    backgroundColor: focused ? 'green' : '#F1F3FB',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    borderRadius: 16,
-                    width: 70,
-                    height: 70,
-                  }}>
+                  style={[
+                    styles.screen,
+                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  ]}>
                   <Image
                     source={require('../assets/home.png')}
                     style={{
@@ -96,15 +91,10 @@ export const AppNavigator = () => {
             options={{
               tabBarIcon: ({focused}) => (
                 <View
-                  style={{
-                    backgroundColor: focused ? 'green' : '#F1F3FB',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    borderRadius: 16,
-                    width: 70,
-                    height: 70,
-                  }}>
+                  style={[
+                    styles.screen,
+                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  ]}>
                   <Image
                     source={require('../assets/atms.png')}
                     style={{
@@ -127,15 +117,10 @@ export const AppNavigator = () => {
             options={{
               tabBarIcon: ({focused}) => (
                 <View
-                  style={{
-                    backgroundColor: focused ? 'green' : '#F1F3FB',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    borderRadius: 16,
-                    width: 70,
-                    height: 70,
-                  }}>
+                  style={[
+                    styles.screen,
+                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  ]}>
                   <Image
                     source={require('../assets/beneficiaries.png')}
                     style={{
@@ -158,15 +143,10 @@ export const AppNavigator = () => {
             options={{
               tabBarIcon: ({focused}) => (
                 <View
-                  style={{
-                    backgroundColor: focused ? 'green' : '#F1F3FB',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    borderRadius: 16,
-                    width: 70,
-                    height: 70,
-                  }}>
+                  style={[
+                    styles.screen,
+                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  ]}>
                   <Image
                     source={require('../assets/transfer.png')}
                     style={{
@@ -189,15 +169,10 @@ export const AppNavigator = () => {
             options={{
               tabBarIcon: ({focused}) => (
                 <View
-                  style={{
-                    backgroundColor: focused ? 'green' : '#F1F3FB',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    borderRadius: 16,
-                    width: 70,
-                    height: 70,
-                  }}>
+                  style={[
+                    styles.screen,
+                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  ]}>
                   <Image
                     source={require('../assets/airpay.png')}
                     style={{
@@ -226,5 +201,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignContent: 'center',
     color: 'white',
+  },
+  screen: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 16,
+    width: 70,
+    height: 70,
   },
 });
