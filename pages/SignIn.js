@@ -21,8 +21,10 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
+import FingerprintScreen from './FingerprintScreen';
 const SignIn = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <ImageBackground
       source={require('../assets/lady.png')}
@@ -77,7 +79,7 @@ const SignIn = ({navigation}) => {
           <StyledButton onPress={() => navigation.navigate('finish')}>
             <Text style={styles.buttontext}>Log In</Text>
           </StyledButton>
-          <TouchableOpacity onPress={() => navigation.navigate('FP')}>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
             <Image source={require('../assets/register.png')} />
           </TouchableOpacity>
         </ButtonContianer>
@@ -88,11 +90,27 @@ const SignIn = ({navigation}) => {
           </Text>
         </Row>
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+        style={{position: 'absolute', top: 150}}>
+        <>
+          <FingerprintScreen
+            setModalVisible={setModalVisible}
+            modalVisible={modalVisible}
+          />
+        </>
+      </Modal>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  mode: {},
   image: {
     flex: 1,
     color: 'white',
