@@ -133,10 +133,24 @@ const SignIn = ({navigation}) => {
             <Image source={require('../assets/register.png')} />
           </TouchableOpacity>
         </ButtonContianer>
-        <Row>
-          <Text style={styles.buttontext}>
-            Don’t have an account?{' '}
-            <Text style={{color: '#F6A721'}}>Sign up</Text>
+        <Row
+          style={{
+            width: 200,
+            justifyContent: 'space-between',
+          }}>
+          <Text
+            style={{fontSize: 14, color: 'white'}}
+            onPress={() => {
+              navigation.navigate('signin');
+            }}>
+            Don't have an account?
+          </Text>
+          <Text
+            style={{color: '#F6A721', textDecorationLine: 'underline'}}
+            onPress={() => {
+              navigation.navigate('signup');
+            }}>
+            Sign Up
           </Text>
         </Row>
       </View>

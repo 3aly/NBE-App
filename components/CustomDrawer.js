@@ -8,7 +8,6 @@ import {
 import {Column, HeadLine, Row} from './StyledComponents';
 import {Paragraph} from 'react-native-paper';
 const CustomDrawer = props => {
-  console.log(props.navigation);
   return (
     <View
       style={{
