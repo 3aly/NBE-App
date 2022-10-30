@@ -3,11 +3,12 @@ import React from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
 import {Column, HeadLine, Row} from './StyledComponents';
 import {Paragraph} from 'react-native-paper';
 const CustomDrawer = props => {
-  console.log();
+  console.log(props.navigation);
   return (
     <View
       style={{
@@ -37,7 +38,9 @@ const CustomDrawer = props => {
             padding: 2,
             marginBottom: 5,
           }}
-          onPress={() => props.navigation.navigate('signin')}>
+          onPress={() => {
+            props.navigation.navigate('signin');
+          }}>
           <Image source={require('../assets/logout.png')} />
           <Paragraph style={{color: '#EB001B', fontSize: 18, marginLeft: 10}}>
             Log Out

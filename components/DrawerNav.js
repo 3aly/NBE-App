@@ -1,23 +1,22 @@
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {Nav} from '../infrastructure';
 import Home1 from '../pages/Home';
 import {Column, HeadLine, Row} from './StyledComponents';
 import CustomDrawer from './CustomDrawer';
 import Dummy from '../pages/Dummy';
+import {TabNavigator} from '../infrastructure/app.navigator';
 
 const Drawer = createDrawerNavigator();
-const DrawerNav = navigation => {
+const DrawerNav = ({navigation}) => {
   return (
     <>
       <Drawer.Navigator
-        drawerContent={props => (
-          <CustomDrawer navigation={navigation} {...props} />
-        )}
+        drawerContent={props => <CustomDrawer {...props} />}
         drawerPosition="right"
-        drawerType="slide"
+        drawerType="front"
         edgeWidth={100}
         hideStatusBar={false}
         screenOptions={{
@@ -64,8 +63,8 @@ const DrawerNav = navigation => {
           },
         }}>
         <Drawer.Screen
-          name="Account Summary"
-          component={Dummy}
+          name="AccountSummary"
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Account Summary',
@@ -80,8 +79,8 @@ const DrawerNav = navigation => {
           }}
         />
         <Drawer.Screen
-          name="Open Certificates & Deposits"
-          component={Dummy}
+          name="OpenCertificatesDeposits"
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Open Certificates & Deposits',
@@ -97,7 +96,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Payement Services"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Payement Services',
@@ -113,7 +112,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Cards Services"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Cards Services',
@@ -129,7 +128,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Hard Token"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Hard Token',
@@ -145,7 +144,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Offers"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Offers',
@@ -161,7 +160,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Customer Services"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Customer Services',
@@ -177,7 +176,7 @@ const DrawerNav = navigation => {
         />
         <Drawer.Screen
           name="Calculators"
-          component={Dummy}
+          component={TabNavigator}
           options={{
             headerTitle: '',
             title: 'Calculators',

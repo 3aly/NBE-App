@@ -11,13 +11,10 @@ import {
 import styled from 'styled-components';
 
 export const StyledInput = styled(TextInput)`
-  background-color: red;
   display: flex;
-  width: 100%;
+  width: 75%;
   margin: 3%;
   padding: 4%;
-  border: 1.5px solid;
-  border-radius: 10px;
 `;
 export const Column = styled(View)`
   display: flex;

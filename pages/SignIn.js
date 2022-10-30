@@ -9,7 +9,9 @@ import {
   Modal,
   TouchableOpacity,
   Pressable,
+  KeyboardAvoidingView,
 } from 'react-native';
+
 import {
   StyledButton,
   StyledInput,
@@ -24,6 +26,8 @@ import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
 const SignIn = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+  const [isSecure, setIsSecure] = useState(true);
+
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <ImageBackground
@@ -37,25 +41,71 @@ const SignIn = ({navigation}) => {
           <Text style={styles.text}>Welcome to The National Bank of Egypt</Text>
         </View>
 
-        <Column>
-          <StyledInput
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              borderColor: 'rgba(255, 255, 255, 0.5)',
-              width: 320,
-            }}
-            placeholder={'Username'}
-            placeholderTextColor="#ffff"
-          />
-          <StyledInput
-            style={{
-              backgroundColor: 'white',
-              borderColor: '#007236',
-              width: 320,
-            }}
-            placeholder={'Password'}
-            placeholderTextColor="#007236"
-          />
+        <Column
+          style={{
+            flex: 0.3,
+            justifyContent: 'space-between',
+          }}>
+          <KeyboardAvoidingView>
+            <Row
+              style={{
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+                borderWidth: 1.5,
+
+                width: 320,
+                border: 1.5,
+                borderRadius: 10,
+                alignItems: 'center',
+              }}>
+              <Image
+                source={require('../assets/@.png')}
+                style={{marginStart: 15}}
+              />
+
+              <StyledInput
+                placeholder={'Username'}
+                placeholderTextColor="#ffff"
+                color={'white'}
+              />
+            </Row>
+          </KeyboardAvoidingView>
+          <KeyboardAvoidingView>
+            <Row
+              style={{
+                border: 1.5,
+                borderRadius: 10,
+                backgroundColor: 'white',
+                borderWidth: 1.5,
+                borderColor: '#007236',
+                width: 320,
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}>
+              <Image
+                source={require('../assets/lock.png')}
+                style={{marginStart: 15}}
+              />
+
+              <StyledInput
+                placeholder={'Password'}
+                placeholderTextColor="#007236"
+                color={'black'}
+                secureTextEntry={isSecure}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecure(!isSecure);
+                }}
+                style={{
+                  alignSelf: 'flex-end',
+                  marginEnd: 10,
+                  marginBottom: 10,
+                }}>
+                <Image source={require('../assets/eye.png')} />
+              </TouchableOpacity>
+            </Row>
+          </KeyboardAvoidingView>
         </Column>
 
         <Row
@@ -69,7 +119,7 @@ const SignIn = ({navigation}) => {
             <CheckBox
               value={isSelected}
               onValueChange={setSelection}
-              style={styles.checkbox}
+              tintColors={{true: 'white', false: '#007236'}}
             />
             <Text style={styles.label}>Remember me</Text>
           </View>
@@ -123,7 +173,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    flex: 0.9,
+    flex: 0.6,
     fontSize: 1,
     justifyContent: 'space-between',
     marginTop: 30,

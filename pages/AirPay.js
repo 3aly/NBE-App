@@ -1,11 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import DrawerNav from '../components/DrawerNav';
 
 const AirPay = () => {
   return (
-    <View>
+    <>
       <Text>AirPay</Text>
-    </View>
+    </>
   );
 };
 

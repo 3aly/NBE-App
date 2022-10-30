@@ -39,6 +39,7 @@ import {AppNavigator} from './infrastructure/app.navigator';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useState} from 'react';
 import FingerprintScreen from './pages/FingerprintScreen';
+import DrawerNav from './components/DrawerNav';
 const AuthStack = createStackNavigator();
 
 const App = () => {
@@ -52,7 +53,7 @@ const App = () => {
 
           <AuthStack.Screen name="signin" component={SignIn} />
           <AuthStack.Screen name="finish" component={Finish} />
-          <AuthStack.Screen name="all" component={Nav} />
+          <AuthStack.Screen name="all" component={DrawerNav} />
         </AuthStack.Navigator>
       </NavigationContainer>
     </>

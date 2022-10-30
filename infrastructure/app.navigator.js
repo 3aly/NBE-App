@@ -34,7 +34,7 @@ import NavBar from '../components/DrawerNav';
 
 const Tab = createBottomTabNavigator();
 
-export const AppNavigator = () => {
+export const TabNavigator = () => {
   return (
     <>
       <Tab.Navigator
