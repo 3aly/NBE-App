@@ -21,8 +21,8 @@ import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 const SplashScreen = ({navigation}) => {
   setTimeout(() => {
-    navigation.navigate('Sign-in');
-  }, 3000);
+    navigation.navigate('signin');
+  }, 1000);
   return (
     <View style={styles.container}>
       <View>

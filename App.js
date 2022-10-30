@@ -50,7 +50,7 @@ const App = () => {
           <AuthStack.Screen name="Splash" component={SplashScreen} />
           <AuthStack.Screen name="FP" component={FingerprintScreen} />
 
-          <AuthStack.Screen name="Sign-in" component={SignIn} />
+          <AuthStack.Screen name="signin" component={SignIn} />
           <AuthStack.Screen name="finish" component={Finish} />
           <AuthStack.Screen name="all" component={Nav} />
         </AuthStack.Navigator>

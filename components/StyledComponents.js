@@ -38,6 +38,7 @@ export const Row = styled(View)`
   display: flex;
   flex-direction: row;
   margin: 2%;
+  align-items: center;
 `;
 export const ButtonContianer = styled(View)`
   display: flex;

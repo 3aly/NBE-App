@@ -30,167 +30,166 @@ import Transfer from '../pages/Transfer';
 import AirPay from '../pages/AirPay';
 import Atms from '../pages/Atms';
 import Benfits from '../pages/Benfits';
+import NavBar from '../components/DrawerNav';
 
 const Tab = createBottomTabNavigator();
 
 export const AppNavigator = () => {
   return (
     <>
-      <>
-        <Tab.Navigator
-          headerMode="none"
-          screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarIcon: {focused: true, color: 'green', size: 50},
-            tabBarStyle: {
-              position: 'absolute',
-              borderTopLeftRadius: 20,
-              borderTopRightRadius: 20,
-              height: 80,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 5,
-              },
-              shadowOpacity: 0.36,
-              shadowRadius: 6.68,
-
-              elevation: 11,
+      <Tab.Navigator
+        headerMode="none"
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: {focused: true, color: 'green', size: 50},
+          tabBarStyle: {
+            position: 'absolute',
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 80,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 5,
             },
-          }}>
-          <Tab.Screen
-            name="SignIn"
-            component={Home}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={[
-                    styles.screen,
-                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
-                  ]}>
-                  <Image
-                    source={require('../assets/home.png')}
-                    style={{
-                      tintColor: focused ? 'white' : '#B7B7B7',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Home
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Atms"
-            component={Atms}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={[
-                    styles.screen,
-                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
-                  ]}>
-                  <Image
-                    source={require('../assets/atms.png')}
-                    style={{
-                      tintColor: focused ? 'white' : '#B7B7B7',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Atms
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Benfits"
-            component={Benfits}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={[
-                    styles.screen,
-                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
-                  ]}>
-                  <Image
-                    source={require('../assets/beneficiaries.png')}
-                    style={{
-                      tintColor: focused ? 'white' : '#B7B7B7',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Benefits
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Transfer"
-            component={Transfer}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={[
-                    styles.screen,
-                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
-                  ]}>
-                  <Image
-                    source={require('../assets/transfer.png')}
-                    style={{
-                      tintColor: focused ? 'white' : '#B7B7B7',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Transfer
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="AirPay"
-            component={AirPay}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={[
-                    styles.screen,
-                    {backgroundColor: focused ? 'green' : '#F1F3FB'},
-                  ]}>
-                  <Image
-                    source={require('../assets/airpay.png')}
-                    style={{
-                      tintColor: focused ? 'white' : '#B7B7B7',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Air Pay
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </>
+            shadowOpacity: 0.36,
+            shadowRadius: 6.68,
+
+            elevation: 11,
+          },
+        }}>
+        <Tab.Screen
+          name="SignIn"
+          component={Home}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View
+                style={[
+                  styles.screen,
+                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                ]}>
+                <Image
+                  source={require('../assets/home.png')}
+                  style={{
+                    tintColor: focused ? 'white' : '#B7B7B7',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  Home
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Atms"
+          component={Atms}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View
+                style={[
+                  styles.screen,
+                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                ]}>
+                <Image
+                  source={require('../assets/atms.png')}
+                  style={{
+                    tintColor: focused ? 'white' : '#B7B7B7',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  Atms
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Benfits"
+          component={Benfits}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View
+                style={[
+                  styles.screen,
+                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                ]}>
+                <Image
+                  source={require('../assets/beneficiaries.png')}
+                  style={{
+                    tintColor: focused ? 'white' : '#B7B7B7',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  Benefits
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Transfer"
+          component={Transfer}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View
+                style={[
+                  styles.screen,
+                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                ]}>
+                <Image
+                  source={require('../assets/transfer.png')}
+                  style={{
+                    tintColor: focused ? 'white' : '#B7B7B7',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  Transfer
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="AirPay"
+          component={AirPay}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View
+                style={[
+                  styles.screen,
+                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                ]}>
+                <Image
+                  source={require('../assets/airpay.png')}
+                  style={{
+                    tintColor: focused ? 'white' : '#B7B7B7',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  Air Pay
+                </Text>
+              </View>
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </>
   );
 };
