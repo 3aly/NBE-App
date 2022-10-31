@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
     marginStart: 50,
     width: 345,
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
 });
 export default DrawerNav;
