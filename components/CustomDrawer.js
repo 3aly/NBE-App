@@ -7,7 +7,15 @@ import {
 } from '@react-navigation/drawer';
 import {Column, HeadLine, Row} from './StyledComponents';
 import {Paragraph} from 'react-native-paper';
+import {useDispatch, useSelector} from 'react-redux';
+import {removeCurrentUser} from '../store/UserSlice';
+import {logout} from '../utils/firebase.config';
+
 const CustomDrawer = props => {
+  const {user} = useSelector(state => state);
+
+  const dispatch = useDispatch();
+
   return (
     <View
       style={{
@@ -38,6 +46,8 @@ const CustomDrawer = props => {
             marginBottom: 5,
           }}
           onPress={() => {
+            logout();
+
             props.navigation.navigate('signin');
           }}>
           <Image source={require('../assets/logout.png')} />
@@ -70,15 +80,19 @@ const CustomDrawer = props => {
           }}>
           <Column>
             <Image
-              source={require('../assets/profile.jpg')}
+              source={{
+                uri: `${user.pic}`,
+              }}
               style={{width: 50, height: 50, borderRadius: 12}}
             />
           </Column>
           <Column>
             <HeadLine style={{fontSize: 18, color: 'black'}}>
-              Ali Hefny
+              {user.displayName}
             </HeadLine>
-            <Paragraph style={{color: '#BABABA'}}>+20 128 539 2988</Paragraph>
+            <Paragraph numberOfLines={2} style={{color: '#BABABA'}}>
+              {user.email}
+            </Paragraph>
           </Column>
           <Column>
             <TouchableOpacity>

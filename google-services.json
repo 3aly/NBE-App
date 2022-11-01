@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802231263478",
+    "project_id": "nbe-app-59671",
+    "storage_bucket": "nbe-app-59671.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802231263478:android:ad31454c750351deb3ccd7",
+        "android_client_info": {
+          "package_name": "com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802231263478-rmmdkhd2hjhee9c2uri8cr2akdq9f2oc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEyQov_qNmLwbDMx0eEoUyfbKYRmkPwFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802231263478-rmmdkhd2hjhee9c2uri8cr2akdq9f2oc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

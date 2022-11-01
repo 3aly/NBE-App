@@ -8,9 +8,13 @@ import {Column, HeadLine, Row} from './StyledComponents';
 import CustomDrawer from './CustomDrawer';
 import Dummy from '../pages/Dummy';
 import {TabNavigator} from '../infrastructure/app.navigator';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = ({navigation}) => {
+  const {user} = useSelector(state => state);
+  console.log(user.pic);
+  const dispatch = useDispatch();
   return (
     <>
       <Drawer.Navigator
@@ -24,12 +28,16 @@ const DrawerNav = ({navigation}) => {
             <Row style={styles.header}>
               <Row>
                 <Image
-                  source={require('../assets/profile.jpg')}
+                  source={{
+                    uri: `${user.pic}`,
+                  }}
                   style={styles.profilepic}
                 />
                 <Column style={{marginLeft: 10}}>
                   <Text style={{fontSize: 16}}>Good morning</Text>
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>Ali</Text>
+                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                    {user.displayName}
+                  </Text>
                 </Column>
               </Row>
               <TouchableOpacity style={styles.notification}>

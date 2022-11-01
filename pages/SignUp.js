@@ -8,8 +8,6 @@ import {
   Button,
   Modal,
   TouchableOpacity,
-  Pressable,
-  KeyboardAvoidingView,
 } from 'react-native';
 
 import {
@@ -19,17 +17,33 @@ import {
   Row,
   Column,
 } from '../components/StyledComponents';
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import CheckBox from '@react-native-community/checkbox';
+import React from 'react';
 import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
+import {Register, GoogleSignin} from '../utils/firebase.config';
 const SignUp = ({navigation}) => {
-  const [isSelected, setSelection] = useState(false);
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const [isSecure, setIsSecure] = useState(true);
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  console.log(displayName, email, password, confirmPassword);
+  function signOut() {
+    signOut()
+      .then(() => {
+        // Sign-out successful.
+        // your code
+      })
+      .catch(error => {
+        // An error happened.
+
+        console.log(error);
+      });
+  }
   return (
     <ImageBackground
       source={require('../assets/lady.png')}
@@ -65,6 +79,9 @@ const SignUp = ({navigation}) => {
               placeholder={'Username'}
               placeholderTextColor="#ffff"
               color={'white'}
+              name="displayName"
+              value={displayName}
+              onChangeText={text => setDisplayName(text)}
             />
           </Row>
           <Row
@@ -87,6 +104,9 @@ const SignUp = ({navigation}) => {
               placeholder={'Email'}
               placeholderTextColor="#ffff"
               color={'white'}
+              value={email}
+              name="email"
+              onChangeText={text => setEmail(text)}
             />
           </Row>
           <Row
@@ -110,6 +130,9 @@ const SignUp = ({navigation}) => {
               placeholderTextColor="#007236"
               color={'black'}
               secureTextEntry={isSecure}
+              value={password}
+              name="password"
+              onChangeText={text => setPassword(text)}
             />
             <TouchableOpacity
               onPress={() => {
@@ -144,6 +167,9 @@ const SignUp = ({navigation}) => {
               placeholderTextColor="#007236"
               color={'black'}
               secureTextEntry={isSecure}
+              value={confirmPassword}
+              name="confirmPassword"
+              onChangeText={text => setConfirmPassword(text)}
             />
             <TouchableOpacity
               onPress={() => {
@@ -160,11 +186,15 @@ const SignUp = ({navigation}) => {
         </Column>
 
         <ButtonContianer>
-          <StyledButton onPress={() => navigation.navigate('finish')}>
+          <StyledButton
+            onPress={() => {
+              Register(email, password, displayName);
+              navigation.navigate('finish');
+            }}>
             <Text style={styles.buttontext}>Sign Up</Text>
           </StyledButton>
           <TouchableOpacity
-            onPress={() => setModalVisible(!modalVisible)}
+            onPress={GoogleSignin}
             style={{
               backgroundColor: 'white',
               borderRadius: 12,

@@ -41,23 +41,28 @@ import {useState} from 'react';
 import FingerprintScreen from './pages/FingerprintScreen';
 import DrawerNav from './components/DrawerNav';
 import SignUp from './pages/SignUp';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
+
 const AuthStack = createStackNavigator();
 
 const App = () => {
   console;
   return (
     <>
-      <NavigationContainer>
-        <AuthStack.Navigator screenOptions={{headerShown: false}}>
-          <AuthStack.Screen name="Splash" component={SplashScreen} />
+      <Provider store={store}>
+        <NavigationContainer>
+          <AuthStack.Navigator screenOptions={{headerShown: false}}>
+            <AuthStack.Screen name="Splash" component={SplashScreen} />
 
-          <AuthStack.Screen name="signin" component={SignIn} />
-          <AuthStack.Screen name="signup" component={SignUp} />
+            <AuthStack.Screen name="signin" component={SignIn} />
+            <AuthStack.Screen name="signup" component={SignUp} />
 
-          <AuthStack.Screen name="finish" component={Finish} />
-          <AuthStack.Screen name="all" component={DrawerNav} />
-        </AuthStack.Navigator>
-      </NavigationContainer>
+            <AuthStack.Screen name="finish" component={Finish} />
+            <AuthStack.Screen name="all" component={DrawerNav} />
+          </AuthStack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 };

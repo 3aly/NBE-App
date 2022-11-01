@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Pressable,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 
 import {
@@ -24,11 +25,28 @@ import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentUser} from '../store/UserSlice';
+import Warning from '../components/Warning';
+import {login} from '../utils/firebase.config';
 const SignIn = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [isSelected, setSelection] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
+  const {user} = useSelector(state => state);
 
+  // const action = {
+  //   DisplayName: 'ali',
+  //   isLoggedIn: true,
+  //   email: 'ali@gamil.com',
+  //   pic: 'https://cdn-icons-png.flaticon.com/512/147/147133.png',
+  // };
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const [warningVisible, setWarningVisible] = useState(false);
+
   return (
     <ImageBackground
       source={require('../assets/lady.png')}
@@ -64,9 +82,12 @@ const SignIn = ({navigation}) => {
               />
 
               <StyledInput
-                placeholder={'Username'}
+                placeholder={'Email'}
                 placeholderTextColor="#ffff"
                 color={'white'}
+                value={email}
+                name="email"
+                onChangeText={text => setEmail(text)}
               />
             </Row>
           </KeyboardAvoidingView>
@@ -92,6 +113,9 @@ const SignIn = ({navigation}) => {
                 placeholderTextColor="#007236"
                 color={'black'}
                 secureTextEntry={isSecure}
+                value={password}
+                name="password"
+                onChangeText={text => setPassword(text)}
               />
               <TouchableOpacity
                 onPress={() => {
@@ -126,7 +150,13 @@ const SignIn = ({navigation}) => {
           <Text style={styles.label}>Forgot password?</Text>
         </Row>
         <ButtonContianer>
-          <StyledButton onPress={() => navigation.navigate('finish')}>
+          <StyledButton
+            onPress={() => {
+              login(email, password);
+              if (user.isLoggedIn) {
+                return navigation.navigate('finish');
+              }
+            }}>
             <Text style={styles.buttontext}>Log In</Text>
           </StyledButton>
           <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
@@ -166,6 +196,21 @@ const SignIn = ({navigation}) => {
           <FingerprintScreen
             setModalVisible={setModalVisible}
             modalVisible={modalVisible}
+          />
+        </>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={warningVisible}
+        onRequestClose={() => {
+          setWarningVisible(!warningVisible);
+        }}
+        style={{position: 'absolute', top: 150}}>
+        <>
+          <Warning
+            setModalVisible={setWarningVisible}
+            modalVisible={warningVisible}
           />
         </>
       </Modal>
