@@ -36,46 +36,35 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 const GoogleProvider = new GoogleAuthProvider();
-const dispatch = useDispatch();
 
-export const Register = (email, password, displayName) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      // Signed in
-      const user = userCredential.user;
+export const CreateAnAccount = async (email, password) => {
+  if (!email || !password) return;
 
-      dispatch(
-        setCurrentUser({
-          displayName: displayName,
-          email: user.email,
-          isLoggedIn: true,
-          pic: 'https://lh3.googleusercontent.com/a/ALm5wu3WEdwsFGG0D1muUoC4O2fs4FrfVL52A0Ul2THOZg=s288-p-no',
-        }),
-      );
-      console.log(user, 'user created');
-    })
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+export const getIn = async (email, password) => {
+  if (!email || !password) return;
 
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const login = (email, password) => {
+export const updater = async (displayName, phoneNumber, photoURL) => {
+  await updateProfile(auth.currentUser, {
+    displayName: displayName,
+    phoneNumber: phoneNumber,
+    photoURL: photoURL,
+  });
+};
+
+export const asdsa = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      dispatch(
-        setCurrentUser({
-          displayName: 'hefny',
-          email: user.email,
-          isLoggedIn: true,
-          pic: 'https://lh3.googleusercontent.com/a/ALm5wu3WEdwsFGG0D1muUoC4O2fs4FrfVL52A0Ul2THOZg=s288-p-no',
-        }),
-      );
-      console.log(user, 'user signed in');
+      // ...
+
+      console.log(user);
+      return user;
     })
     .catch(error => {
       const errorCode = error.code;
@@ -83,11 +72,32 @@ export const login = (email, password) => {
     });
 };
 
-export const logout = () => {
+// export const login = (email, password) => {
+//   signInWithEmailAndPassword(auth, email, password)
+//     .then(userCredential => {
+//       // Signed in
+//       const user = userCredential.user;
+//       dispatch(
+//         setCurrentUser({
+//           displayName: 'hefny',
+//           email: user.email,
+//           isLoggedIn: true,
+//           pic: 'https://lh3.googleusercontent.com/a/ALm5wu3WEdwsFGG0D1muUoC4O2fs4FrfVL52A0Ul2THOZg=s288-p-no',
+//         }),
+//       );
+//       console.log(user, 'user signed in');
+//     })
+//     .catch(error => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//     });
+// };
+
+export const SignOut = () => {
   signOut(auth);
-  dispatch(removeCurrentUser());
 
   console.log('signed out');
+  return;
 };
 
 export const createUserDocumentFromAuth = async (

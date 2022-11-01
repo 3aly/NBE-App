@@ -9,13 +9,19 @@ import {Column, HeadLine, Row} from './StyledComponents';
 import {Paragraph} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeCurrentUser} from '../store/UserSlice';
-import {logout} from '../utils/firebase.config';
+import {SignOut} from '../utils/firebase.config';
 
 const CustomDrawer = props => {
   const {user} = useSelector(state => state);
 
   const dispatch = useDispatch();
 
+  const LogOut = () => {
+    SignOut();
+    dispatch(removeCurrentUser());
+
+    props.navigation.navigate('signin');
+  };
   return (
     <View
       style={{
@@ -45,11 +51,7 @@ const CustomDrawer = props => {
             padding: 2,
             marginBottom: 5,
           }}
-          onPress={() => {
-            logout();
-
-            props.navigation.navigate('signin');
-          }}>
+          onPress={LogOut}>
           <Image source={require('../assets/logout.png')} />
           <Paragraph style={{color: '#EB001B', fontSize: 18, marginLeft: 10}}>
             Log Out

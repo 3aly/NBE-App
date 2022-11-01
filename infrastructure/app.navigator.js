@@ -85,7 +85,7 @@ export const TabNavigator = () => {
             ),
           }}
         />
-        {/* <Tab.Screen
+        <Tab.Screen
           name="Atms"
           component={Atms}
           options={{
@@ -110,7 +110,7 @@ export const TabNavigator = () => {
               </View>
             ),
           }}
-        /> */}
+        />
         <Tab.Screen
           name="Benfits"
           component={Benfits}

@@ -27,37 +27,53 @@ import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentUser} from '../store/UserSlice';
+import {toggler} from '../store/LangSlice';
+
 import Warning from '../components/Warning';
-import {login} from '../utils/firebase.config';
+import {getIn} from '../utils/firebase.config';
+import {log} from 'react-native-reanimated';
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const {lang} = useSelector(state => state);
   const [isSelected, setSelection] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
   const {user} = useSelector(state => state);
 
-  // const action = {
-  //   DisplayName: 'ali',
-  //   isLoggedIn: true,
-  //   email: 'ali@gamil.com',
-  //   pic: 'https://cdn-icons-png.flaticon.com/512/147/147133.png',
-  // };
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [warningVisible, setWarningVisible] = useState(false);
+  const login = async (email, password) => {
+    const {user} = await getIn(email, password);
 
+    dispatch(
+      setCurrentUser({
+        displayName: user.displayName,
+        email: user.email,
+        isLoggedIn: true,
+        pic: user.photoURL,
+        phoneNumber: user.phoneNumber,
+      }),
+    );
+    navigation.navigate('finish');
+  };
   return (
     <ImageBackground
       source={require('../assets/lady.png')}
       style={styles.image}>
       <View style={styles.contianer}>
-        <View style={styles.title}>
-          <View>
+        <Column style={styles.title} lang={lang.langArabic}>
+          <TouchableOpacity onPress={() => dispatch(toggler())}>
             <Image source={require('../assets/Topbar.png')} />
-          </View>
-          <Text style={styles.text}>Welcome to The National Bank of Egypt</Text>
-        </View>
+          </TouchableOpacity>
+          {lang.langArabic ? (
+            <Text style={styles.text}>اهلا بيك في الضحك</Text>
+          ) : (
+            <Text style={styles.text}>
+              Welcome to The National Bank of Egypt
+            </Text>
+          )}
+        </Column>
 
         <Column
           style={{
@@ -153,9 +169,7 @@ const SignIn = ({navigation}) => {
           <StyledButton
             onPress={() => {
               login(email, password);
-              if (user.isLoggedIn) {
-                return navigation.navigate('finish');
-              }
+              navigation.navigate('finish');
             }}>
             <Text style={styles.buttontext}>Log In</Text>
           </StyledButton>

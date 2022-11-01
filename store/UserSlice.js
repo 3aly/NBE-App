@@ -6,10 +6,11 @@ const initialState = {
   isLoggedIn: false,
   email: '',
   pic: '',
+  phoneNumber: '',
 };
 
 export const UserSlice = createSlice({
-  name: 'counter',
+  name: 'user',
   initialState,
   reducers: {
     setCurrentUser: (state, action) => {
@@ -22,7 +23,8 @@ export const UserSlice = createSlice({
       state.displayName = action.payload.displayName;
       state.isLoggedIn = action.payload.isLoggedIn;
       state.email = action.payload.email;
-      state.pic = action.payload.pic;
+      state.pic = action.payload.photoURL;
+      state.phoneNumber = action.payload.phoneNumber;
     },
     removeCurrentUser: state => {
       console.log('iam in');
@@ -34,6 +36,7 @@ export const UserSlice = createSlice({
       state.isLoggedIn = false;
       state.email = '';
       state.pic = '';
+      state.phoneNumber = '';
     },
   },
 });

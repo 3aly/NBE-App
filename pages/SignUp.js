@@ -20,30 +20,43 @@ import {
 import React from 'react';
 import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
-import {Register, GoogleSignin} from '../utils/firebase.config';
+import {CreateAnAccount, updater} from '../utils/firebase.config';
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentUser} from '../store/UserSlice';
 const SignUp = ({navigation}) => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
+  console.log(displayName, email, password, phoneNumber, photoURL);
   const [isSecure, setIsSecure] = useState(true);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const Register = async (
+    displayName,
+    email,
+    password,
+    phoneNumber,
+    photoURL,
+  ) => {
+    const {user} = await CreateAnAccount(email, password);
+    await updater(displayName, phoneNumber, photoURL);
+    console.log(user, 'AuthedUser');
 
-  console.log(displayName, email, password, confirmPassword);
-  function signOut() {
-    signOut()
-      .then(() => {
-        // Sign-out successful.
-        // your code
-      })
-      .catch(error => {
-        // An error happened.
-
-        console.log(error);
-      });
-  }
+    dispatch(
+      setCurrentUser({
+        displayName: user.displayName,
+        email: user.email,
+        isLoggedIn: true,
+        pic: user.photoURL,
+        phoneNumber: user.phoneNumber,
+      }),
+    );
+    navigation.navigate('finish');
+  };
   return (
     <ImageBackground
       source={require('../assets/lady.png')}
@@ -111,6 +124,56 @@ const SignUp = ({navigation}) => {
           </Row>
           <Row
             style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              borderColor: 'rgba(255, 255, 255, 0.5)',
+              borderWidth: 1.5,
+
+              width: 320,
+              border: 1.5,
+              borderRadius: 10,
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/beneficiaries.png')}
+              style={{marginStart: 15, width: 20, height: 20}}
+            />
+
+            <StyledInput
+              placeholder={'Phone Number'}
+              placeholderTextColor="#ffff"
+              color={'white'}
+              name="phoneNumber"
+              value={phoneNumber}
+              onChangeText={text => setPhoneNumber(text)}
+            />
+          </Row>
+          <Row
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              borderColor: 'rgba(255, 255, 255, 0.5)',
+              borderWidth: 1.5,
+
+              width: 320,
+              border: 1.5,
+              borderRadius: 10,
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../assets/beneficiaries.png')}
+              style={{marginStart: 15, width: 20, height: 20}}
+            />
+
+            <StyledInput
+              placeholder={'Photo URl'}
+              placeholderTextColor="#ffff"
+              color={'white'}
+              name="photoURL"
+              value={photoURL}
+              onChangeText={text => setPhotoURL(text)}
+            />
+          </Row>
+          <Row
+            style={{
               border: 1.5,
               borderRadius: 10,
               backgroundColor: 'white',
@@ -146,55 +209,16 @@ const SignUp = ({navigation}) => {
               <Image source={require('../assets/eye.png')} />
             </TouchableOpacity>
           </Row>
-          <Row
-            style={{
-              border: 1.5,
-              borderRadius: 10,
-              backgroundColor: 'white',
-              borderWidth: 1.5,
-              borderColor: '#007236',
-              width: 320,
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}>
-            <Image
-              source={require('../assets/lock.png')}
-              style={{marginStart: 15}}
-            />
-
-            <StyledInput
-              placeholder={'Confirm Password'}
-              placeholderTextColor="#007236"
-              color={'black'}
-              secureTextEntry={isSecure}
-              value={confirmPassword}
-              name="confirmPassword"
-              onChangeText={text => setConfirmPassword(text)}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setIsSecure(!isSecure);
-              }}
-              style={{
-                alignSelf: 'flex-end',
-                marginEnd: 10,
-                marginBottom: 10,
-              }}>
-              <Image source={require('../assets/eye.png')} />
-            </TouchableOpacity>
-          </Row>
         </Column>
 
         <ButtonContianer>
           <StyledButton
             onPress={() => {
-              Register(email, password, displayName);
-              navigation.navigate('finish');
+              Register(displayName, email, password, phoneNumber, photoURL);
             }}>
             <Text style={styles.buttontext}>Sign Up</Text>
           </StyledButton>
           <TouchableOpacity
-            onPress={GoogleSignin}
             style={{
               backgroundColor: 'white',
               borderRadius: 12,

@@ -20,7 +20,7 @@ const Atms = () => {
 
   useEffect(() => {
     Geolocation.getCurrentPosition(pos => {
-      console.log(pos.coords, 'before');
+      console.log('get location');
       setPosition({
         latitude: pos.coords.latitude,
         longitude: pos.coords.longitude,
@@ -28,10 +28,11 @@ const Atms = () => {
         longitudeDelta: 0.0421,
       });
     });
-  }, [position]);
-  console.log(position, 'after');
+  }, []);
+  console.log('after');
 
   useEffect(() => {
+    console.log('get atms');
     fetch(URL)
       .then(data => {
         return data.json();
@@ -42,7 +43,7 @@ const Atms = () => {
       .catch(error => {
         console.log(error);
       });
-  }, [position, URL]);
+  }, [position]);
 
   const mapMarkers = () => {
     return atmLocations.map((atm, index) => (

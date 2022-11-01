@@ -19,6 +19,8 @@ export const StyledInput = styled(TextInput)`
 export const Column = styled(View)`
   display: flex;
   flex-direction: column;
+  justify-content: ${props => (props.lan ? `flex-end` : `flex-start`)};
+
   margin: 2%;
 `;
 export const StyledButton = styled(TouchableOpacity)`
@@ -33,7 +35,7 @@ export const StyledButton = styled(TouchableOpacity)`
 `;
 export const Row = styled(View)`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.lan ? `row-reverse` : `row`)};
   margin: 2%;
   align-items: center;
 `;
