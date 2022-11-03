@@ -10,10 +10,12 @@ import {Paragraph} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeCurrentUser} from '../store/UserSlice';
 import {SignOut} from '../utils/firebase.config';
+import {toggler} from '../store/LangSlice';
 
 const CustomDrawer = props => {
   const {user} = useSelector(state => state);
-
+  const {langArabic} = useSelector(state => state.lang);
+  console.log(user, 'user');
   const dispatch = useDispatch();
 
   const LogOut = () => {
@@ -35,7 +37,16 @@ const CustomDrawer = props => {
           marginTop: 10,
         }}>
         <Image source={require('../assets/fullogo.png')} />
-        <Image source={require('../assets/ar.png')} />
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(toggler());
+          }}>
+          {langArabic ? (
+            <Image source={require('../assets/en.png')} />
+          ) : (
+            <Image source={require('../assets/ar.png')} />
+          )}
+        </TouchableOpacity>
       </View>
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
@@ -60,16 +71,10 @@ const CustomDrawer = props => {
 
         <Row
           style={{
-            alignItems: 'center',
-            alignSelf: 'center',
-            justifyContent: 'center',
-
-            width: 270,
-            height: 90,
+            width: 290,
             borderRadius: 30,
             marginBottom: 20,
             backgroundColor: 'white',
-
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
@@ -77,24 +82,22 @@ const CustomDrawer = props => {
             },
             shadowOpacity: 0.22,
             shadowRadius: 2.22,
-
             elevation: 3,
           }}>
           <Column>
             <Image
+              style={{width: 40, height: 40, borderRadius: 12}}
               source={{
-                uri: `${user.pic}`,
+                uri: `${user.photoURL}`,
               }}
-              style={{width: 50, height: 50, borderRadius: 12}}
             />
+            {console.log(user.photoURL, 'user.pic')}
           </Column>
           <Column>
             <HeadLine style={{fontSize: 18, color: 'black'}}>
               {user.displayName}
             </HeadLine>
-            <Paragraph numberOfLines={2} style={{color: '#BABABA'}}>
-              {user.email}
-            </Paragraph>
+            <Paragraph style={{color: '#BABABA'}}>{user.email}</Paragraph>
           </Column>
           <Column>
             <TouchableOpacity>

@@ -5,7 +5,7 @@ const initialState = {
   displayName: '',
   isLoggedIn: false,
   email: '',
-  pic: '',
+  photoURL: '',
   phoneNumber: '',
 };
 
@@ -23,7 +23,7 @@ export const UserSlice = createSlice({
       state.displayName = action.payload.displayName;
       state.isLoggedIn = action.payload.isLoggedIn;
       state.email = action.payload.email;
-      state.pic = action.payload.photoURL;
+      state.photoURL = action.payload.photoURL;
       state.phoneNumber = action.payload.phoneNumber;
     },
     removeCurrentUser: state => {
@@ -35,7 +35,7 @@ export const UserSlice = createSlice({
       state.displayName = '';
       state.isLoggedIn = false;
       state.email = '';
-      state.pic = '';
+      state.photoURL = '';
       state.phoneNumber = '';
     },
   },

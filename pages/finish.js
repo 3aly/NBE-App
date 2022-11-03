@@ -19,7 +19,10 @@ import {
 } from '../components/StyledComponents';
 import styled from 'styled-components';
 import React from 'react';
+import {useSelector} from 'react-redux';
 const Finish = ({navigation}) => {
+  const {lang} = useSelector(state => state);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -30,22 +33,42 @@ const Finish = ({navigation}) => {
         }}
         source={require('../assets/man.png')}
         style={styles.image}>
-        <Column style={{justifyContent: 'flex-end', paddingHorizontal: 10}}>
+        <Column
+          style={{
+            justifyContent: 'flex-end',
+            paddingHorizontal: 10,
+          }}>
           <Image
             source={require('../assets/logo.png')}
             style={{alignSelf: 'flex-end', marginVertical: 20}}
           />
-
-          <HeadLine>Congratulations</HeadLine>
-          <Paragraph>
-            You have successfully registered in NBE online banking service
-          </Paragraph>
+          <Column arabic={lang.langArabic}>
+            {lang.langArabic ? (
+              <>
+                <HeadLine>مبروك</HeadLine>
+                <Paragraph>
+                  دلوقتي تقدر تستخدم الخدمات الالكترونية للبنك الأهلي المصري
+                </Paragraph>
+              </>
+            ) : (
+              <>
+                <HeadLine>Congratulations</HeadLine>
+                <Paragraph>
+                  You have successfully registered in NBE online banking service
+                </Paragraph>
+              </>
+            )}
+          </Column>
         </Column>
 
         <TouchableOpacity
           style={styles.Button}
           onPress={() => navigation.navigate('all')}>
-          <Text style={styles.buttontext}>Finish</Text>
+          {lang.langArabic ? (
+            <Text style={styles.buttontext}>انهاء</Text>
+          ) : (
+            <Text style={styles.buttontext}>Finish</Text>
+          )}
         </TouchableOpacity>
       </ImageBackground>
     </View>

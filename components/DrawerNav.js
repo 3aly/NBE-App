@@ -2,19 +2,17 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {Nav} from '../infrastructure';
-import Home1 from '../pages/Home';
 import {Column, HeadLine, Row} from './StyledComponents';
 import CustomDrawer from './CustomDrawer';
-import Dummy from '../pages/Dummy';
 import {TabNavigator} from '../infrastructure/app.navigator';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = ({navigation}) => {
   const {user} = useSelector(state => state);
+  const {langArabic} = useSelector(state => state.lang);
+  console.log(langArabic);
   console.log(user.pic);
-  const dispatch = useDispatch();
   return (
     <>
       <Drawer.Navigator
@@ -29,7 +27,7 @@ const DrawerNav = ({navigation}) => {
               <Row>
                 <Image
                   source={{
-                    uri: `${user.pic}`,
+                    uri: `${user.photoURL}`,
                   }}
                   style={styles.profilepic}
                 />

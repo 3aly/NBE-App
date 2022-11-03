@@ -19,7 +19,7 @@ export const StyledInput = styled(TextInput)`
 export const Column = styled(View)`
   display: flex;
   flex-direction: column;
-  justify-content: ${props => (props.lan ? `flex-end` : `flex-start`)};
+  justify-content: ${props => (props.arabic ? `flex-end` : `flex-start`)};
 
   margin: 2%;
 `;
@@ -35,13 +35,13 @@ export const StyledButton = styled(TouchableOpacity)`
 `;
 export const Row = styled(View)`
   display: flex;
-  flex-direction: ${props => (props.lan ? `row-reverse` : `row`)};
-  margin: 2%;
+  flex-direction: ${props => (props.arabic ? `row-reverse` : `row`)};
+  margin: 0%;
   align-items: center;
 `;
 export const ButtonContianer = styled(View)`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.arabic ? `row-reverse` : `row`)};
   justify-content: space-between;
   align-items: center;
   width: 100%;

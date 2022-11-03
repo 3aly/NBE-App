@@ -31,10 +31,13 @@ import AirPay from '../pages/AirPay';
 import Atms from '../pages/Atms';
 import Benfits from '../pages/Benfits';
 import NavBar from '../components/DrawerNav';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {
+  const {langArabic} = useSelector(state => state.lang);
+
   return (
     <>
       <Tab.Navigator
@@ -75,12 +78,21 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                <Text
-                  style={{
-                    color: focused ? 'white' : '#B7B7B7',
-                  }}>
-                  Home
-                </Text>
+                {langArabic ? (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    الرئيسية
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    Home
+                  </Text>
+                )}
               </View>
             ),
           }}
@@ -101,12 +113,21 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                <Text
-                  style={{
-                    color: focused ? 'white' : '#B7B7B7',
-                  }}>
-                  Atms
-                </Text>
+                {langArabic ? (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    الصراف الالي
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    Atms
+                  </Text>
+                )}
               </View>
             ),
           }}
@@ -127,12 +148,21 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                <Text
-                  style={{
-                    color: focused ? 'white' : '#B7B7B7',
-                  }}>
-                  Benefits
-                </Text>
+                {langArabic ? (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    المستفيدون
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    Benfits
+                  </Text>
+                )}
               </View>
             ),
           }}
@@ -153,12 +183,21 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                <Text
-                  style={{
-                    color: focused ? 'white' : '#B7B7B7',
-                  }}>
-                  Transfer
-                </Text>
+                {langArabic ? (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    تحويل
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    Transfer
+                  </Text>
+                )}
               </View>
             ),
           }}
@@ -179,12 +218,21 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                <Text
-                  style={{
-                    color: focused ? 'white' : '#B7B7B7',
-                  }}>
-                  Air Pay
-                </Text>
+                {langArabic ? (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    الدفع الهوائي
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: focused ? 'white' : '#B7B7B7',
+                    }}>
+                    Air Pay
+                  </Text>
+                )}
               </View>
             ),
           }}

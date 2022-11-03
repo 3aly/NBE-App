@@ -23,14 +23,15 @@ import FingerprintScreen from './FingerprintScreen';
 import {CreateAnAccount, updater} from '../utils/firebase.config';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentUser} from '../store/UserSlice';
+import {toggler} from '../store/LangSlice';
 const SignUp = ({navigation}) => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const {lang} = useSelector(state => state);
 
-  console.log(displayName, email, password, phoneNumber, photoURL);
   const [isSecure, setIsSecure] = useState(true);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -51,7 +52,7 @@ const SignUp = ({navigation}) => {
         displayName: user.displayName,
         email: user.email,
         isLoggedIn: true,
-        pic: user.photoURL,
+        photoURL: user.photoURL,
         phoneNumber: user.phoneNumber,
       }),
     );
@@ -62,15 +63,27 @@ const SignUp = ({navigation}) => {
       source={require('../assets/lady.png')}
       style={styles.image}>
       <View style={styles.contianer}>
-        <View style={styles.title}>
-          <View>
-            <Image source={require('../assets/Topbar.png')} />
-          </View>
-        </View>
+        <Column style={styles.title} arabic={lang.langArabic}>
+          <Row
+            style={{
+              justifyContent: 'space-between',
+            }}>
+            <TouchableOpacity onPress={() => dispatch(toggler())}>
+              {lang.langArabic ? (
+                <Image source={require('../assets/en.png')} />
+              ) : (
+                <Image source={require('../assets/ar.png')} />
+              )}
+            </TouchableOpacity>
+            <Image source={require('../assets/logo.png')} />
+          </Row>
+        </Column>
 
         <Column
           style={{
             justifyContent: 'space-between',
+            alignContent: 'space-between',
+            height: 410,
           }}>
           <Row
             style={{
@@ -82,14 +95,20 @@ const SignUp = ({navigation}) => {
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
-            }}>
+            }}
+            arabic={lang.langArabic}>
             <Image
               source={require('../assets/beneficiaries.png')}
-              style={{marginStart: 15, width: 20, height: 20}}
+              style={
+                lang.langArabic
+                  ? {marginEnd: 15, width: 20, height: 20}
+                  : {marginStart: 15, width: 20, height: 20}
+              }
             />
 
             <StyledInput
-              placeholder={'Username'}
+              placeholder={lang.langArabic ? 'اسم المستخدم' : 'Username'}
+              textAlign={lang.langArabic ? 'right' : 'left'}
               placeholderTextColor="#ffff"
               color={'white'}
               name="displayName"
@@ -107,14 +126,16 @@ const SignUp = ({navigation}) => {
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
-            }}>
+            }}
+            arabic={lang.langArabic}>
             <Image
               source={require('../assets/@.png')}
-              style={{marginStart: 15}}
+              style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
             <StyledInput
-              placeholder={'Email'}
+              placeholder={lang.langArabic ? 'البريد الالكتورني' : 'Email'}
+              textAlign={lang.langArabic ? 'right' : 'left'}
               placeholderTextColor="#ffff"
               color={'white'}
               value={email}
@@ -132,14 +153,20 @@ const SignUp = ({navigation}) => {
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
-            }}>
+            }}
+            arabic={lang.langArabic}>
             <Image
               source={require('../assets/beneficiaries.png')}
-              style={{marginStart: 15, width: 20, height: 20}}
+              style={
+                lang.langArabic
+                  ? {marginEnd: 15, width: 20, height: 20}
+                  : {marginStart: 15, width: 20, height: 20}
+              }
             />
 
             <StyledInput
-              placeholder={'Phone Number'}
+              placeholder={lang.langArabic ? 'رقم الموبايل' : 'Phone Number'}
+              textAlign={lang.langArabic ? 'right' : 'left'}
               placeholderTextColor="#ffff"
               color={'white'}
               name="phoneNumber"
@@ -157,17 +184,23 @@ const SignUp = ({navigation}) => {
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
-            }}>
+            }}
+            arabic={lang.langArabic}>
             <Image
               source={require('../assets/beneficiaries.png')}
-              style={{marginStart: 15, width: 20, height: 20}}
+              style={
+                lang.langArabic
+                  ? {marginEnd: 15, width: 20, height: 20}
+                  : {marginStart: 15, width: 20, height: 20}
+              }
             />
 
             <StyledInput
-              placeholder={'Photo URl'}
+              placeholder={lang.langArabic ? 'لينك الصورة' : 'Image URL'}
+              textAlign={lang.langArabic ? 'right' : 'left'}
               placeholderTextColor="#ffff"
               color={'white'}
-              name="photoURL"
+              name="phoneNumber"
               value={photoURL}
               onChangeText={text => setPhotoURL(text)}
             />
@@ -180,22 +213,22 @@ const SignUp = ({navigation}) => {
               borderWidth: 1.5,
               borderColor: '#007236',
               width: 320,
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}>
+            }}
+            arabic={lang.langArabic}>
             <Image
               source={require('../assets/lock.png')}
-              style={{marginStart: 15}}
+              style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
             <StyledInput
-              placeholder={'Password'}
+              placeholder={lang.langArabic ? 'كلمة السر' : 'Password'}
               placeholderTextColor="#007236"
               color={'black'}
               secureTextEntry={isSecure}
               value={password}
               name="password"
               onChangeText={text => setPassword(text)}
+              textAlign={lang.langArabic ? 'right' : 'left'}
             />
             <TouchableOpacity
               onPress={() => {
@@ -203,20 +236,22 @@ const SignUp = ({navigation}) => {
               }}
               style={{
                 alignSelf: 'flex-end',
-                marginEnd: 10,
                 marginBottom: 10,
               }}>
               <Image source={require('../assets/eye.png')} />
             </TouchableOpacity>
           </Row>
         </Column>
-
-        <ButtonContianer>
+        <ButtonContianer arabic={lang.langArabic}>
           <StyledButton
             onPress={() => {
               Register(displayName, email, password, phoneNumber, photoURL);
             }}>
-            <Text style={styles.buttontext}>Sign Up</Text>
+            {lang.langArabic ? (
+              <Text style={styles.buttontext}>سجل</Text>
+            ) : (
+              <Text style={styles.buttontext}>Sign Up</Text>
+            )}
           </StyledButton>
           <TouchableOpacity
             style={{
@@ -236,19 +271,45 @@ const SignUp = ({navigation}) => {
         </ButtonContianer>
         <Row
           style={{
-            width: 190,
-            justifyContent: 'space-between',
-          }}>
-          <Text style={{fontSize: 14, color: 'white'}}>
-            You have an account?
-          </Text>
-          <Text
-            style={{color: '#F6A721', textDecorationLine: 'underline'}}
-            onPress={() => {
-              navigation.navigate('signin');
-            }}>
-            Sign Up
-          </Text>
+            width: 220,
+            justifyContent: 'space-evenly',
+            padding: 10,
+          }}
+          arabic={lang.langArabic}>
+          {lang.langArabic ? (
+            <Text
+              style={{fontSize: 14, color: 'white'}}
+              onPress={() => {
+                navigation.navigate('signin');
+              }}>
+              عندك حساب ؟
+            </Text>
+          ) : (
+            <Text
+              style={{fontSize: 14, color: 'white'}}
+              onPress={() => {
+                navigation.navigate('signin');
+              }}>
+              You have an account?
+            </Text>
+          )}
+          {lang.langArabic ? (
+            <Text
+              style={{color: '#F6A721', textDecorationLine: 'underline'}}
+              onPress={() => {
+                navigation.navigate('signin');
+              }}>
+              سجل دخول
+            </Text>
+          ) : (
+            <Text
+              style={{color: '#F6A721', textDecorationLine: 'underline'}}
+              onPress={() => {
+                navigation.navigate('signin');
+              }}>
+              Sign In
+            </Text>
+          )}
         </Row>
       </View>
       <Modal
@@ -288,8 +349,8 @@ const styles = StyleSheet.create({
     fontSize: 1,
     justifyContent: 'space-between',
     marginTop: 30,
-    alignItems: 'center',
-    textAlign: 'end',
+    paddingHorizontal: 8,
+    width: 320,
   },
   text: {
     fontSize: 40,
