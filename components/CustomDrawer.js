@@ -29,13 +29,13 @@ const CustomDrawer = props => {
       style={{
         flex: 1,
       }}>
-      <View
+      <Row
         style={{
-          flexDirection: 'row',
           justifyContent: 'space-between',
           padding: 20,
           marginTop: 10,
-        }}>
+        }}
+        arabic={langArabic}>
         <Image source={require('../assets/fullogo.png')} />
         <TouchableOpacity
           onPress={() => {
@@ -47,7 +47,7 @@ const CustomDrawer = props => {
             <Image source={require('../assets/ar.png')} />
           )}
         </TouchableOpacity>
-      </View>
+      </Row>
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
@@ -56,34 +56,45 @@ const CustomDrawer = props => {
         <TouchableOpacity
           style={{
             alignSelf: 'center',
-            flexDirection: 'row',
-            alignItems: 'center',
             width: 270,
             padding: 2,
             marginBottom: 5,
           }}
           onPress={LogOut}>
-          <Image source={require('../assets/logout.png')} />
-          <Paragraph style={{color: '#EB001B', fontSize: 18, marginLeft: 10}}>
-            Log Out
-          </Paragraph>
+          <Row arabic={langArabic} style={{marginHorizontal: 10}}>
+            <Image source={require('../assets/logout.png')} />
+            {langArabic ? (
+              <Paragraph
+                style={{color: '#EB001B', fontSize: 18, marginHorizontal: 10}}>
+                تسجيل خروج
+              </Paragraph>
+            ) : (
+              <Paragraph
+                style={{color: '#EB001B', fontSize: 18, marginHorizontal: 10}}>
+                Log Out
+              </Paragraph>
+            )}
+          </Row>
         </TouchableOpacity>
 
         <Row
-          style={{
-            width: 290,
-            borderRadius: 30,
-            marginBottom: 20,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 1,
+          style={[
+            {flexDirection: langArabic ? 'row-reverse' : 'row'},
+            {
+              width: 290,
+              borderRadius: 30,
+              marginBottom: 20,
+              backgroundColor: 'white',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 1,
+              },
+              shadowOpacity: 0.22,
+              shadowRadius: 2.22,
+              elevation: 3,
             },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-            elevation: 3,
-          }}>
+          ]}>
           <Column>
             <Image
               style={{width: 40, height: 40, borderRadius: 12}}

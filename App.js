@@ -47,7 +47,6 @@ import {store} from './store/store';
 const AuthStack = createStackNavigator();
 
 const App = () => {
-  console;
   return (
     <>
       <Provider store={store}>

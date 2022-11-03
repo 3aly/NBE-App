@@ -200,7 +200,7 @@ const SignUp = ({navigation}) => {
               textAlign={lang.langArabic ? 'right' : 'left'}
               placeholderTextColor="#ffff"
               color={'white'}
-              name="phoneNumber"
+              name="photoURL"
               value={photoURL}
               onChangeText={text => setPhotoURL(text)}
             />

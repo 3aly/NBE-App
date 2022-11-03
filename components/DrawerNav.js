@@ -17,11 +17,11 @@ const DrawerNav = ({navigation}) => {
     <>
       <Drawer.Navigator
         drawerContent={props => <CustomDrawer {...props} />}
-        drawerPosition="right"
         drawerType="front"
         edgeWidth={100}
         hideStatusBar={false}
         screenOptions={{
+          drawerPosition: langArabic ? 'right' : 'left',
           headerRight: () => (
             <Row style={styles.header}>
               <Row>
@@ -32,7 +32,11 @@ const DrawerNav = ({navigation}) => {
                   style={styles.profilepic}
                 />
                 <Column style={{marginLeft: 10}}>
-                  <Text style={{fontSize: 16}}>Good morning</Text>
+                  {langArabic ? (
+                    <Text style={{fontSize: 16}}>صباح الخير</Text>
+                  ) : (
+                    <Text style={{fontSize: 16}}>Good morning</Text>
+                  )}
                   <Text style={{fontSize: 16, fontWeight: 'bold'}}>
                     {user.displayName}
                   </Text>
@@ -55,143 +59,215 @@ const DrawerNav = ({navigation}) => {
             elevation: 0,
             shadowOpacity: 0,
           },
-          swipeEnabled: true,
-          gestureEnabled: true,
           drawerActiveBackgroundColor: '#007236',
           drawerActiveTintColor: 'white',
           drawerInactiveTintColor: 'black',
 
-          drawerStyle: {
-            backgroundColor: '#F1F3FB',
-            width: 300,
-            borderBottomEndRadius: 40,
-            borderTopEndRadius: 40,
-          },
+          drawerStyle: langArabic
+            ? {
+                backgroundColor: '#F1F3FB',
+
+                width: 300,
+                borderBottomStartRadius: 40,
+                borderTopStartRadius: 40,
+              }
+            : {
+                backgroundColor: '#F1F3FB',
+                width: 300,
+                borderBottomEndRadius: 40,
+                borderTopEndRadius: 40,
+              },
         }}>
         <Drawer.Screen
-          name="AccountSummary"
+          name={langArabic ? 'ملخص الحساب' : 'Account Summary'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Account Summary',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/acountsummery.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="OpenCertificatesDeposits"
+          name={
+            langArabic ? 'الشهادات و الودائع' : 'Open Certificates Deposits'
+          }
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Open Certificates & Deposits',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/opencert.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Payement Services"
+          name={langArabic ? 'خدمات الدفع' : 'Payement Services'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Payement Services',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/paymentserv.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Cards Services"
+          name={langArabic ? 'خدمات الكروت' : 'Cards Services'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Cards Services',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/cardserv.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Hard Token"
+          name={langArabic ? 'جهاز رموز الأمان' : 'Hard Token'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Hard Token',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/hardtoken.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Offers"
+          name={langArabic ? 'العروض' : 'Offers'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Offers',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/offers.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Customer Services"
+          name={langArabic ? 'خدمات العملاء' : 'Customer Services'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Customer Services',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/costumerserv.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Calculators"
+          name={langArabic ? 'حاسبة القروض' : 'Calculators'}
           component={TabNavigator}
           options={{
             headerTitle: '',
-            title: 'Calculators',
             drawerIcon: ({focused}) => (
               <Image
                 source={require('../assets/calculator.png')}
-                style={{
-                  tintColor: focused ? 'white' : 'black',
-                }}
+                style={[
+                  langArabic
+                    ? {
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        right: 8,
+                      }
+                    : {},
+                  {
+                    tintColor: focused ? 'white' : 'black',
+                  },
+                ]}
               />
             ),
           }}

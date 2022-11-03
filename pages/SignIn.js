@@ -38,24 +38,27 @@ const SignIn = ({navigation}) => {
   const {lang} = useSelector(state => state);
   const [isSelected, setSelection] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
-  const {user} = useSelector(state => state);
+  const {isLoggedIn} = useSelector(state => state.user);
 
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [warningVisible, setWarningVisible] = useState(false);
+
   const login = async (email, password) => {
     const {user} = await getIn(email, password);
+
+    console.log(isLoggedIn);
 
     dispatch(
       setCurrentUser({
         displayName: user.displayName,
         email: user.email,
-        isLoggedIn: true,
+        isLoggedIn: !isLoggedIn,
         photoURL: user.photoURL,
         phoneNumber: user.phoneNumber,
       }),
     );
-    navigation.navigate('finish');
+    console.log(isLoggedIn);
   };
   return (
     <ImageBackground
