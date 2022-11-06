@@ -19,17 +19,41 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
+import {useSelector} from 'react-redux';
+import {dark, light} from '../infrastructure/theme/colors';
+import {useEffect} from 'react';
 const SplashScreen = ({navigation}) => {
-  setTimeout(() => {
-    navigation.navigate('signin');
-  }, 1000);
+  const {darkmode} = useSelector(state => state.theme);
+  const {isLoggedIn} = useSelector(state => state.user);
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('signin');
+    }, 1000);
+  }, []);
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: darkmode ? dark.bg : light.bg},
+      ]}>
       <View>
-        <Image source={require('../assets/biglogo.png')} />
+        <Image
+          source={
+            darkmode
+              ? require('../assets/biglogod.png')
+              : require('../assets/biglogo.png')
+          }
+        />
       </View>
       <View>
-        <Image source={require('../assets/logogreen.png')} />
+        <Image
+          source={
+            darkmode
+              ? require('../assets/logogreend.png')
+              : require('../assets/logogreen.png')
+          }
+        />
       </View>
     </View>
   );

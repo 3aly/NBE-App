@@ -11,6 +11,7 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Alert,
+  Switch,
 } from 'react-native';
 
 import {
@@ -32,6 +33,7 @@ import {toggler} from '../store/LangSlice';
 import Warning from '../components/Warning';
 import {getIn} from '../utils/firebase.config';
 import {log} from 'react-native-reanimated';
+
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +41,7 @@ const SignIn = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
   const {isLoggedIn} = useSelector(state => state.user);
+  const {darkmode} = useSelector(state => state.theme);
 
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);

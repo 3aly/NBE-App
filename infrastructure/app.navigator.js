@@ -32,11 +32,14 @@ import Atms from '../pages/Atms';
 import Benfits from '../pages/Benfits';
 import NavBar from '../components/DrawerNav';
 import {useSelector} from 'react-redux';
+import {dark, light} from './theme/colors';
+import Dummy from '../pages/Dummy';
 
 const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {
   const {langArabic} = useSelector(state => state.lang);
+  const {darkmode} = useSelector(state => state.theme);
 
   return (
     <>
@@ -45,32 +48,34 @@ export const TabNavigator = () => {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
-          tabBarIcon: {focused: true, color: 'green', size: 50},
           tabBarStyle: {
             position: 'absolute',
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-            height: 80,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.36,
-            shadowRadius: 6.68,
+            height: 85,
 
-            elevation: 11,
+            backgroundColor: darkmode ? dark.tabnavbg : 'white',
           },
         }}>
         <Tab.Screen
           name="SignIn"
-          component={Home}
+          component={Dummy}
           options={{
             tabBarIcon: ({focused}) => (
               <View
                 style={[
                   styles.screen,
-                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  {
+                    borderRadius: 16,
+                    backgroundColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : !focused && darkmode
+                        ? '#374049'
+                        : !focused && !darkmode
+                        ? light.tabnavbg
+                        : '#007236',
+                  },
                 ]}>
                 <Image
                   source={require('../assets/home.png')}
@@ -78,21 +83,13 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                {langArabic ? (
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    الرئيسية
-                  </Text>
-                ) : (
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Home
-                  </Text>
-                )}
+
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  {langArabic ? 'الرئيسية' : 'Home'}
+                </Text>
               </View>
             ),
           }}
@@ -105,7 +102,17 @@ export const TabNavigator = () => {
               <View
                 style={[
                   styles.screen,
-                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  {
+                    borderRadius: 16,
+                    backgroundColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : !focused && darkmode
+                        ? '#374049'
+                        : !focused && !darkmode
+                        ? light.tabnavbg
+                        : '#007236',
+                  },
                 ]}>
                 <Image
                   source={require('../assets/atms.png')}
@@ -113,34 +120,35 @@ export const TabNavigator = () => {
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
                 />
-                {langArabic ? (
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    الصراف الالي
-                  </Text>
-                ) : (
-                  <Text
-                    style={{
-                      color: focused ? 'white' : '#B7B7B7',
-                    }}>
-                    Atms
-                  </Text>
-                )}
+                <Text
+                  style={{
+                    color: focused ? 'white' : '#B7B7B7',
+                  }}>
+                  {langArabic ? 'الصراف الالي' : 'Atms'}
+                </Text>
               </View>
             ),
           }}
         />
         <Tab.Screen
           name="Benfits"
-          component={Benfits}
+          component={Dummy}
           options={{
             tabBarIcon: ({focused}) => (
               <View
                 style={[
                   styles.screen,
-                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  {
+                    borderRadius: 16,
+                    backgroundColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : !focused && darkmode
+                        ? '#374049'
+                        : !focused && !darkmode
+                        ? light.tabnavbg
+                        : '#007236',
+                  },
                 ]}>
                 <Image
                   source={require('../assets/beneficiaries.png')}
@@ -169,13 +177,23 @@ export const TabNavigator = () => {
         />
         <Tab.Screen
           name="Transfer"
-          component={Transfer}
+          component={Dummy}
           options={{
             tabBarIcon: ({focused}) => (
               <View
                 style={[
                   styles.screen,
-                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  {
+                    borderRadius: 16,
+                    backgroundColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : !focused && darkmode
+                        ? '#374049'
+                        : !focused && !darkmode
+                        ? light.tabnavbg
+                        : '#007236',
+                  },
                 ]}>
                 <Image
                   source={require('../assets/transfer.png')}
@@ -204,13 +222,23 @@ export const TabNavigator = () => {
         />
         <Tab.Screen
           name="AirPay"
-          component={AirPay}
+          component={Dummy}
           options={{
             tabBarIcon: ({focused}) => (
               <View
                 style={[
                   styles.screen,
-                  {backgroundColor: focused ? 'green' : '#F1F3FB'},
+                  {
+                    borderRadius: 16,
+                    backgroundColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : !focused && darkmode
+                        ? '#374049'
+                        : !focused && !darkmode
+                        ? light.tabnavbg
+                        : '#007236',
+                  },
                 ]}>
                 <Image
                   source={require('../assets/airpay.png')}

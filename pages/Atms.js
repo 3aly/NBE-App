@@ -4,8 +4,12 @@ import DrawerNav from '../components/DrawerNav';
 import {PROVIDER_GOOGLE, Marker, MapMarker} from 'react-native-maps';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import {mapDarkStyke, mapStanderd} from '../infrastructure/theme/colors';
+import {useSelector} from 'react-redux';
 
 const Atms = () => {
+  const {darkmode} = useSelector(state => state.theme);
+
   const [position, setPosition] = useState({
     latitude: 30.105392,
     longitude: 31.405106,
@@ -64,7 +68,8 @@ const Atms = () => {
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={position}
-        showsUserLocation={true}>
+        showsUserLocation={true}
+        customMapStyle={darkmode ? mapDarkStyke : mapStanderd}>
         {mapMarkers()}
       </MapView>
       <View style={styles.overlay}>

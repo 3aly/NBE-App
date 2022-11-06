@@ -1,16 +1,19 @@
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {DrawerActions, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {Column, HeadLine, Row} from './StyledComponents';
 import CustomDrawer from './CustomDrawer';
 import {TabNavigator} from '../infrastructure/app.navigator';
 import {useDispatch, useSelector} from 'react-redux';
+import {dark, light} from '../infrastructure/theme/colors';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = ({navigation}) => {
   const {user} = useSelector(state => state);
   const {langArabic} = useSelector(state => state.lang);
+  const {darkmode} = useSelector(state => state.theme);
+
   console.log(langArabic);
   console.log(user.pic);
   return (
@@ -22,6 +25,19 @@ const DrawerNav = ({navigation}) => {
         hideStatusBar={false}
         screenOptions={{
           drawerPosition: langArabic ? 'right' : 'left',
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{margin: 14}}
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+              <Image
+                source={
+                  darkmode
+                    ? require('../assets/drawericond.png')
+                    : require('../assets/drawericon.png')
+                }
+              />
+            </TouchableOpacity>
+          ),
           headerRight: () => (
             <Row style={styles.header}>
               <Row>
@@ -32,12 +48,13 @@ const DrawerNav = ({navigation}) => {
                   style={styles.profilepic}
                 />
                 <Column style={{marginLeft: 10}}>
-                  {langArabic ? (
-                    <Text style={{fontSize: 16}}>صباح الخير</Text>
-                  ) : (
-                    <Text style={{fontSize: 16}}>Good morning</Text>
-                  )}
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                  <Text
+                    style={{fontSize: 16, color: darkmode ? 'white' : 'black'}}>
+                    {langArabic ? 'صباح الخير' : 'Good morning'}
+                  </Text>
+
+                  <Text
+                    style={{fontSize: 16, color: darkmode ? 'white' : 'black'}}>
                     {user.displayName}
                   </Text>
                 </Column>
@@ -54,29 +71,28 @@ const DrawerNav = ({navigation}) => {
             marginLeft: -25,
           },
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: darkmode ? dark.bg : light.bg,
             height: 100,
             elevation: 0,
             shadowOpacity: 0,
           },
-          drawerActiveBackgroundColor: '#007236',
-          drawerActiveTintColor: 'white',
-          drawerInactiveTintColor: 'black',
+          drawerActiveBackgroundColor: darkmode
+            ? light.sbitembg
+            : dark.sbitembg,
+          drawerActiveTintColor: darkmode
+            ? dark.sidebartextcolor
+            : light.sidebartextcolor,
+          drawerInactiveTintColor: darkmode ? 'white' : 'black',
 
-          drawerStyle: langArabic
-            ? {
-                backgroundColor: '#F1F3FB',
+          drawerStyle: {
+            backgroundColor: darkmode ? dark.sidebar : light.sidebar,
 
-                width: 300,
-                borderBottomStartRadius: 40,
-                borderTopStartRadius: 40,
-              }
-            : {
-                backgroundColor: '#F1F3FB',
-                width: 300,
-                borderBottomEndRadius: 40,
-                borderTopEndRadius: 40,
-              },
+            width: 300,
+            borderBottomStartRadius: langArabic ? 40 : 0,
+            borderTopStartRadius: langArabic ? 40 : 0,
+            borderBottomEndRadius: langArabic ? 0 : 40,
+            borderTopEndRadius: langArabic ? 0 : 40,
+          },
         }}>
         <Drawer.Screen
           name={langArabic ? 'ملخص الحساب' : 'Account Summary'}
@@ -85,7 +101,11 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/acountsummery.png')}
+                source={
+                  darkmode
+                    ? require('../assets/acountsummeryd.png')
+                    : require('../assets/acountsummery.png')
+                }
                 style={[
                   langArabic
                     ? {
@@ -95,7 +115,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -121,7 +148,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -145,7 +179,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -169,7 +210,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -193,7 +241,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -217,7 +272,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -241,7 +303,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
@@ -265,7 +334,14 @@ const DrawerNav = ({navigation}) => {
                       }
                     : {},
                   {
-                    tintColor: focused ? 'white' : 'black',
+                    tintColor:
+                      focused && darkmode
+                        ? '#007236'
+                        : focused && !darkmode
+                        ? 'white'
+                        : !focused && darkmode
+                        ? 'white'
+                        : 'black',
                   },
                 ]}
               />
