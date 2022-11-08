@@ -30,7 +30,10 @@ const firebaseConfig = {
   messagingSenderId: '802231263478',
   appId: '1:802231263478:web:97c2f905235dd7b3b3ccd7',
 };
-import {removeCurrentUser, setCurrentUser} from '../store/UserSlice';
+import {
+  removeCurrentUser,
+  setCurrentUser,
+} from '../utils/Redux/store/UserSlice';
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();

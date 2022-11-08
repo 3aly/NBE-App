@@ -8,6 +8,10 @@ import {
   Button,
   Modal,
   TouchableOpacity,
+  Pressable,
+  KeyboardAvoidingView,
+  Alert,
+  Switch,
 } from 'react-native';
 
 import {
@@ -17,46 +21,47 @@ import {
   Row,
   Column,
 } from '../components/StyledComponents';
-import React from 'react';
+import React, {Component} from 'react';
+import styled from 'styled-components';
+import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
-import {CreateAnAccount, updater} from '../utils/firebase.config';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCurrentUser} from '../store/UserSlice';
-import {toggler} from '../store/LangSlice';
-const SignUp = ({navigation}) => {
-  const [displayName, setDisplayName] = useState('');
+import {setCurrentUser} from '../utils/Redux/store//UserSlice';
+import {toggler} from '../utils/Redux/store//LangSlice';
+
+import Warning from '../components/Warning';
+import {getIn} from '../utils/FireBase/firebase.config';
+import {log} from 'react-native-reanimated';
+
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const {lang} = useSelector(state => state);
-
+  const [isSelected, setSelection] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
+  const {isLoggedIn} = useSelector(state => state.user);
+  const {darkmode} = useSelector(state => state.theme);
 
-  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const Register = async (
-    displayName,
-    email,
-    password,
-    phoneNumber,
-    photoURL,
-  ) => {
-    const {user} = await CreateAnAccount(email, password);
-    await updater(displayName, phoneNumber, photoURL);
-    console.log(user, 'AuthedUser');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [warningVisible, setWarningVisible] = useState(false);
+
+  const login = async (email, password) => {
+    const {user} = await getIn(email, password);
+
+    console.log(isLoggedIn);
 
     dispatch(
       setCurrentUser({
         displayName: user.displayName,
         email: user.email,
-        isLoggedIn: true,
+        isLoggedIn: !isLoggedIn,
         photoURL: user.photoURL,
         phoneNumber: user.phoneNumber,
       }),
     );
-    navigation.navigate('finish');
+    console.log(isLoggedIn);
   };
   return (
     <ImageBackground
@@ -77,13 +82,21 @@ const SignUp = ({navigation}) => {
             </TouchableOpacity>
             <Image source={require('../assets/logo.png')} />
           </Row>
+          <Column>
+            {lang.langArabic ? (
+              <Text style={styles.text}>اهلا بيك في البنك الأهلي المصري</Text>
+            ) : (
+              <Text style={styles.text}>
+                Welcome to The National Bank of Egypt
+              </Text>
+            )}
+          </Column>
         </Column>
 
         <Column
           style={{
+            flex: 0.3,
             justifyContent: 'space-between',
-            alignContent: 'space-between',
-            height: 410,
           }}>
           <Row
             style={{
@@ -94,38 +107,6 @@ const SignUp = ({navigation}) => {
               width: 320,
               border: 1.5,
               borderRadius: 10,
-              alignItems: 'center',
-            }}
-            arabic={lang.langArabic}>
-            <Image
-              source={require('../assets/beneficiaries.png')}
-              style={
-                lang.langArabic
-                  ? {marginEnd: 15, width: 20, height: 20}
-                  : {marginStart: 15, width: 20, height: 20}
-              }
-            />
-
-            <StyledInput
-              placeholder={lang.langArabic ? 'اسم المستخدم' : 'Username'}
-              textAlign={lang.langArabic ? 'right' : 'left'}
-              placeholderTextColor="#ffff"
-              color={'white'}
-              name="displayName"
-              value={displayName}
-              onChangeText={text => setDisplayName(text)}
-            />
-          </Row>
-          <Row
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              borderColor: 'rgba(255, 255, 255, 0.5)',
-              borderWidth: 1.5,
-
-              width: 320,
-              border: 1.5,
-              borderRadius: 10,
-              alignItems: 'center',
             }}
             arabic={lang.langArabic}>
             <Image
@@ -134,77 +115,16 @@ const SignUp = ({navigation}) => {
             />
 
             <StyledInput
-              placeholder={lang.langArabic ? 'البريد الالكتورني' : 'Email'}
-              textAlign={lang.langArabic ? 'right' : 'left'}
+              placeholder={lang.langArabic ? 'اسم المستخدم' : 'Username'}
               placeholderTextColor="#ffff"
               color={'white'}
               value={email}
               name="email"
               onChangeText={text => setEmail(text)}
-            />
-          </Row>
-          <Row
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              borderColor: 'rgba(255, 255, 255, 0.5)',
-              borderWidth: 1.5,
-
-              width: 320,
-              border: 1.5,
-              borderRadius: 10,
-              alignItems: 'center',
-            }}
-            arabic={lang.langArabic}>
-            <Image
-              source={require('../assets/beneficiaries.png')}
-              style={
-                lang.langArabic
-                  ? {marginEnd: 15, width: 20, height: 20}
-                  : {marginStart: 15, width: 20, height: 20}
-              }
-            />
-
-            <StyledInput
-              placeholder={lang.langArabic ? 'رقم الموبايل' : 'Phone Number'}
               textAlign={lang.langArabic ? 'right' : 'left'}
-              placeholderTextColor="#ffff"
-              color={'white'}
-              name="phoneNumber"
-              value={phoneNumber}
-              onChangeText={text => setPhoneNumber(text)}
             />
           </Row>
-          <Row
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              borderColor: 'rgba(255, 255, 255, 0.5)',
-              borderWidth: 1.5,
 
-              width: 320,
-              border: 1.5,
-              borderRadius: 10,
-              alignItems: 'center',
-            }}
-            arabic={lang.langArabic}>
-            <Image
-              source={require('../assets/beneficiaries.png')}
-              style={
-                lang.langArabic
-                  ? {marginEnd: 15, width: 20, height: 20}
-                  : {marginStart: 15, width: 20, height: 20}
-              }
-            />
-
-            <StyledInput
-              placeholder={lang.langArabic ? 'لينك الصورة' : 'Image URL'}
-              textAlign={lang.langArabic ? 'right' : 'left'}
-              placeholderTextColor="#ffff"
-              color={'white'}
-              name="photoURL"
-              value={photoURL}
-              onChangeText={text => setPhotoURL(text)}
-            />
-          </Row>
           <Row
             style={{
               border: 1.5,
@@ -242,31 +162,47 @@ const SignUp = ({navigation}) => {
             </TouchableOpacity>
           </Row>
         </Column>
+
+        <Row
+          style={{
+            width: 320,
+            color: 'white',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+          arabic={lang.langArabic}>
+          <Row arabic={lang.langArabic}>
+            <CheckBox
+              value={isSelected}
+              onValueChange={setSelection}
+              tintColors={{true: 'white', false: '#007236'}}
+            />
+            {lang.langArabic ? (
+              <Text style={styles.label}>تذكرني</Text>
+            ) : (
+              <Text style={styles.label}>Remember me</Text>
+            )}
+          </Row>
+          {lang.langArabic ? (
+            <Text style={styles.label}>مش فاكر كلمة المرور ؟</Text>
+          ) : (
+            <Text style={styles.label}>Forgot password?</Text>
+          )}
+        </Row>
         <ButtonContianer arabic={lang.langArabic}>
           <StyledButton
             onPress={() => {
-              Register(displayName, email, password, phoneNumber, photoURL);
+              login(email, password);
+              navigation.navigate('finish');
             }}>
             {lang.langArabic ? (
-              <Text style={styles.buttontext}>سجل</Text>
+              <Text style={styles.buttontext}>تسجيل دخول</Text>
             ) : (
-              <Text style={styles.buttontext}>Sign Up</Text>
+              <Text style={styles.buttontext}>Log in</Text>
             )}
           </StyledButton>
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 12,
-              padding: 2,
-              width: 50,
-              height: 50,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Image
-              source={require('../assets/google.png')}
-              style={{width: 35, height: 35}}
-            />
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            <Image source={require('../assets/register.png')} />
           </TouchableOpacity>
         </ButtonContianer>
         <Row
@@ -282,7 +218,7 @@ const SignUp = ({navigation}) => {
               onPress={() => {
                 navigation.navigate('signin');
               }}>
-              عندك حساب ؟
+              معندكش حساب ؟
             </Text>
           ) : (
             <Text
@@ -290,24 +226,24 @@ const SignUp = ({navigation}) => {
               onPress={() => {
                 navigation.navigate('signin');
               }}>
-              You have an account?
+              Don't have an account?
             </Text>
           )}
           {lang.langArabic ? (
             <Text
               style={{color: '#F6A721', textDecorationLine: 'underline'}}
               onPress={() => {
-                navigation.navigate('signin');
+                navigation.navigate('signup');
               }}>
-              سجل دخول
+              سجل دلوقتي
             </Text>
           ) : (
             <Text
               style={{color: '#F6A721', textDecorationLine: 'underline'}}
               onPress={() => {
-                navigation.navigate('signin');
+                navigation.navigate('signup');
               }}>
-              Sign In
+              Sign Up
             </Text>
           )}
         </Row>
@@ -327,12 +263,26 @@ const SignUp = ({navigation}) => {
           />
         </>
       </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={warningVisible}
+        onRequestClose={() => {
+          setWarningVisible(!warningVisible);
+        }}
+        style={{position: 'absolute', top: 150}}>
+        <>
+          <Warning
+            setModalVisible={setWarningVisible}
+            modalVisible={warningVisible}
+          />
+        </>
+      </Modal>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  mode: {},
   image: {
     flex: 1,
     color: 'white',
@@ -358,6 +308,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   form: {
+    flex: 0.25,
     padding: 5,
     justifyContent: 'space-between',
     marginHorizontal: 18,
@@ -387,4 +338,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default SignIn;

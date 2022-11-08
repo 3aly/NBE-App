@@ -4,9 +4,9 @@ import {DrawerActions, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {Column, HeadLine, Row} from './StyledComponents';
 import CustomDrawer from './CustomDrawer';
-import {TabNavigator} from '../infrastructure/app.navigator';
+import {TabNavigator} from '../components/app.navigator';
 import {useDispatch, useSelector} from 'react-redux';
-import {dark, light} from '../infrastructure/theme/colors';
+import {dark, light} from '../utils/theme/colors';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = ({navigation}) => {

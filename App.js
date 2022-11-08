@@ -30,19 +30,15 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Finish from './pages/finish';
-import SignIn from './pages/SignIn';
-import SplashScreen from './pages/SplashScreen';
-import {Nav} from './infrastructure/index';
-import {AppNavigator} from './infrastructure/app.navigator';
+import Finish from './src/pages/finish';
+import SignIn from './src/pages/SignIn';
+import SplashScreen from './src/pages/SplashScreen';
 
 import {createStackNavigator} from '@react-navigation/stack';
-import {useState} from 'react';
-import FingerprintScreen from './pages/FingerprintScreen';
-import DrawerNav from './components/DrawerNav';
-import SignUp from './pages/SignUp';
+import DrawerNav from './src/components/DrawerNav';
+import SignUp from './src/pages/SignUp';
 import {Provider} from 'react-redux';
-import {store} from './store/store';
+import {store} from './src/utils/Redux/store/store';
 
 const AuthStack = createStackNavigator();
 

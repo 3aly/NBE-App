@@ -8,11 +8,11 @@ import {
 import {Column, HeadLine, Row} from './StyledComponents';
 import {Paragraph} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {removeCurrentUser} from '../store/UserSlice';
-import {SignOut} from '../utils/firebase.config';
-import {toggler} from '../store/LangSlice';
+import {removeCurrentUser} from '../utils/Redux/store/UserSlice';
+import {SignOut} from '../utils/FireBase/firebase.config';
+import {toggler} from '../utils/Redux/store/LangSlice';
 
-import DarkMode, {ThemeToggler} from '../store/DarkMode';
+import DarkMode, {ThemeToggler} from '../utils/Redux/store/DarkMode';
 
 const CustomDrawer = props => {
   const {user} = useSelector(state => state);

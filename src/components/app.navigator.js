@@ -32,7 +32,7 @@ import Atms from '../pages/Atms';
 import Benfits from '../pages/Benfits';
 import NavBar from '../components/DrawerNav';
 import {useSelector} from 'react-redux';
-import {dark, light} from './theme/colors';
+import {dark, light} from '../utils/theme/colors';
 import Dummy from '../pages/Dummy';
 
 const Tab = createBottomTabNavigator();

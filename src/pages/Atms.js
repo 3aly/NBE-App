@@ -4,7 +4,7 @@ import DrawerNav from '../components/DrawerNav';
 import {PROVIDER_GOOGLE, Marker, MapMarker} from 'react-native-maps';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
-import {mapDarkStyke, mapStanderd} from '../infrastructure/theme/colors';
+import {mapDarkStyke, mapStanderd} from '../utils/theme/colors';
 import {useSelector} from 'react-redux';
 
 const Atms = () => {
@@ -83,7 +83,6 @@ export default Atms;
 const styles = StyleSheet.create({
   map: {
     flex: 1,
-    width: 400,
     height: 800,
   },
   container: {
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
 
   overlay: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 75,
     left: 10,
     alignSelf: 'flex-start',
   },

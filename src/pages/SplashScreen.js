@@ -20,7 +20,7 @@ import styled from 'styled-components';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {dark, light} from '../infrastructure/theme/colors';
+import {dark, light} from '../utils/theme/colors';
 import {useEffect} from 'react';
 const SplashScreen = ({navigation}) => {
   const {darkmode} = useSelector(state => state.theme);
