@@ -6,6 +6,7 @@ import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {mapDarkStyke, mapStanderd} from '../utils/theme/colors';
 import {useSelector} from 'react-redux';
+import {googlelogo, marker} from '../utils/images';
 
 const Atms = () => {
   const {darkmode} = useSelector(state => state.theme);
@@ -57,7 +58,7 @@ const Atms = () => {
           latitude: atm.geometry.location.lat,
           longitude: atm.geometry.location.lng,
         }}
-        image={require('../assets/marker.png')}
+        image={marker}
         title={'NBE Atm Here!'}></Marker>
     ));
   };
@@ -73,7 +74,7 @@ const Atms = () => {
         {mapMarkers()}
       </MapView>
       <View style={styles.overlay}>
-        <Image source={require('../assets/googlelogo.png')} />
+        <Image source={googlelogo} />
       </View>
     </View>
   );

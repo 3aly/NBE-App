@@ -33,6 +33,7 @@ import {toggler} from '../utils/Redux/store//LangSlice';
 import Warning from '../components/Warning';
 import {getIn} from '../utils/FireBase/firebase.config';
 import {log} from 'react-native-reanimated';
+import {ar, at, en, lady, logo, lock, eye, register} from '../utils/images';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -64,9 +65,7 @@ const SignIn = ({navigation}) => {
     console.log(isLoggedIn);
   };
   return (
-    <ImageBackground
-      source={require('../assets/lady.png')}
-      style={styles.image}>
+    <ImageBackground source={lady} style={styles.image}>
       <View style={styles.contianer}>
         <Column style={styles.title} arabic={lang.langArabic}>
           <Row
@@ -74,13 +73,9 @@ const SignIn = ({navigation}) => {
               justifyContent: 'space-between',
             }}>
             <TouchableOpacity onPress={() => dispatch(toggler())}>
-              {lang.langArabic ? (
-                <Image source={require('../assets/en.png')} />
-              ) : (
-                <Image source={require('../assets/ar.png')} />
-              )}
+              {lang.langArabic ? <Image source={en} /> : <Image source={ar} />}
             </TouchableOpacity>
-            <Image source={require('../assets/logo.png')} />
+            <Image source={logo} />
           </Row>
           <Column>
             {lang.langArabic ? (
@@ -104,13 +99,13 @@ const SignIn = ({navigation}) => {
               borderColor: 'rgba(255, 255, 255, 0.5)',
               borderWidth: 1.5,
 
-              width: 320,
+              width: 350,
               border: 1.5,
               borderRadius: 10,
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/@.png')}
+              source={at}
               style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
@@ -132,11 +127,11 @@ const SignIn = ({navigation}) => {
               backgroundColor: 'white',
               borderWidth: 1.5,
               borderColor: '#007236',
-              width: 320,
+              width: 350,
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/lock.png')}
+              source={lock}
               style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
@@ -158,14 +153,14 @@ const SignIn = ({navigation}) => {
                 alignSelf: 'flex-end',
                 marginBottom: 10,
               }}>
-              <Image source={require('../assets/eye.png')} />
+              <Image source={eye} />
             </TouchableOpacity>
           </Row>
         </Column>
 
         <Row
           style={{
-            width: 320,
+            width: 350,
             color: 'white',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -202,14 +197,14 @@ const SignIn = ({navigation}) => {
             )}
           </StyledButton>
           <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-            <Image source={require('../assets/register.png')} />
+            <Image source={register} />
           </TouchableOpacity>
         </ButtonContianer>
         <Row
           style={{
-            width: 220,
-            justifyContent: 'space-evenly',
+            justifyContent: 'space-between',
             padding: 10,
+            width: 208,
           }}
           arabic={lang.langArabic}>
           {lang.langArabic ? (
@@ -299,8 +294,7 @@ const styles = StyleSheet.create({
     fontSize: 1,
     justifyContent: 'space-between',
     marginTop: 30,
-    paddingHorizontal: 8,
-    width: 320,
+    width: 350,
   },
   text: {
     fontSize: 40,

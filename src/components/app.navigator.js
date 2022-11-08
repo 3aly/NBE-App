@@ -34,6 +34,7 @@ import NavBar from '../components/DrawerNav';
 import {useSelector} from 'react-redux';
 import {dark, light} from '../utils/theme/colors';
 import Dummy from '../pages/Dummy';
+import {airpay, atms, beneficiaries, home, transfer} from '../utils/images';
 
 const Tab = createBottomTabNavigator();
 
@@ -78,7 +79,7 @@ export const TabNavigator = () => {
                   },
                 ]}>
                 <Image
-                  source={require('../assets/home.png')}
+                  source={home}
                   style={{
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
@@ -115,7 +116,7 @@ export const TabNavigator = () => {
                   },
                 ]}>
                 <Image
-                  source={require('../assets/atms.png')}
+                  source={atms}
                   style={{
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
@@ -151,7 +152,7 @@ export const TabNavigator = () => {
                   },
                 ]}>
                 <Image
-                  source={require('../assets/beneficiaries.png')}
+                  source={beneficiaries}
                   style={{
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
@@ -196,7 +197,7 @@ export const TabNavigator = () => {
                   },
                 ]}>
                 <Image
-                  source={require('../assets/transfer.png')}
+                  source={transfer}
                   style={{
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}
@@ -241,7 +242,7 @@ export const TabNavigator = () => {
                   },
                 ]}>
                 <Image
-                  source={require('../assets/airpay.png')}
+                  source={airpay}
                   style={{
                     tintColor: focused ? 'white' : '#B7B7B7',
                   }}

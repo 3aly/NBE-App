@@ -24,6 +24,17 @@ import {CreateAnAccount, updater} from '../utils/FireBase/firebase.config';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentUser} from '../utils/Redux/store//UserSlice';
 import {toggler} from '../utils/Redux/store/LangSlice';
+import {
+  ar,
+  at,
+  beneficiaries,
+  en,
+  eye,
+  google,
+  lady,
+  lock,
+  logo,
+} from '../utils/images';
 const SignUp = ({navigation}) => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -59,9 +70,7 @@ const SignUp = ({navigation}) => {
     navigation.navigate('finish');
   };
   return (
-    <ImageBackground
-      source={require('../assets/lady.png')}
-      style={styles.image}>
+    <ImageBackground source={lady} style={styles.image}>
       <View style={styles.contianer}>
         <Column style={styles.title} arabic={lang.langArabic}>
           <Row
@@ -69,13 +78,9 @@ const SignUp = ({navigation}) => {
               justifyContent: 'space-between',
             }}>
             <TouchableOpacity onPress={() => dispatch(toggler())}>
-              {lang.langArabic ? (
-                <Image source={require('../assets/en.png')} />
-              ) : (
-                <Image source={require('../assets/ar.png')} />
-              )}
+              {lang.langArabic ? <Image source={en} /> : <Image source={ar} />}
             </TouchableOpacity>
-            <Image source={require('../assets/logo.png')} />
+            <Image source={logo} />
           </Row>
         </Column>
 
@@ -91,14 +96,14 @@ const SignUp = ({navigation}) => {
               borderColor: 'rgba(255, 255, 255, 0.5)',
               borderWidth: 1.5,
 
-              width: 320,
+              width: 350,
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/beneficiaries.png')}
+              source={beneficiaries}
               style={
                 lang.langArabic
                   ? {marginEnd: 15, width: 20, height: 20}
@@ -122,14 +127,14 @@ const SignUp = ({navigation}) => {
               borderColor: 'rgba(255, 255, 255, 0.5)',
               borderWidth: 1.5,
 
-              width: 320,
+              width: 350,
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/@.png')}
+              source={at}
               style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
@@ -149,14 +154,14 @@ const SignUp = ({navigation}) => {
               borderColor: 'rgba(255, 255, 255, 0.5)',
               borderWidth: 1.5,
 
-              width: 320,
+              width: 350,
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/beneficiaries.png')}
+              source={beneficiaries}
               style={
                 lang.langArabic
                   ? {marginEnd: 15, width: 20, height: 20}
@@ -180,14 +185,14 @@ const SignUp = ({navigation}) => {
               borderColor: 'rgba(255, 255, 255, 0.5)',
               borderWidth: 1.5,
 
-              width: 320,
+              width: 350,
               border: 1.5,
               borderRadius: 10,
               alignItems: 'center',
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/beneficiaries.png')}
+              source={beneficiaries}
               style={
                 lang.langArabic
                   ? {marginEnd: 15, width: 20, height: 20}
@@ -212,11 +217,11 @@ const SignUp = ({navigation}) => {
               backgroundColor: 'white',
               borderWidth: 1.5,
               borderColor: '#007236',
-              width: 320,
+              width: 350,
             }}
             arabic={lang.langArabic}>
             <Image
-              source={require('../assets/lock.png')}
+              source={lock}
               style={lang.langArabic ? {marginEnd: 15} : {marginStart: 15}}
             />
 
@@ -238,7 +243,7 @@ const SignUp = ({navigation}) => {
                 alignSelf: 'flex-end',
                 marginBottom: 10,
               }}>
-              <Image source={require('../assets/eye.png')} />
+              <Image source={eye} />
             </TouchableOpacity>
           </Row>
         </Column>
@@ -263,10 +268,7 @@ const SignUp = ({navigation}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Image
-              source={require('../assets/google.png')}
-              style={{width: 35, height: 35}}
-            />
+            <Image source={google} style={{width: 35, height: 35}} />
           </TouchableOpacity>
         </ButtonContianer>
         <Row
@@ -349,8 +351,7 @@ const styles = StyleSheet.create({
     fontSize: 1,
     justifyContent: 'space-between',
     marginTop: 30,
-    paddingHorizontal: 8,
-    width: 320,
+    width: 350,
   },
   text: {
     fontSize: 40,

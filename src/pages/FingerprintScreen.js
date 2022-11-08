@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {HeadLine, Paragraph} from '../components/StyledComponents';
+import {fp} from '../utils/images';
 
 const FingerprintScreen = ({setModalVisible, modalVisible}) => {
   return (
@@ -20,7 +21,7 @@ const FingerprintScreen = ({setModalVisible, modalVisible}) => {
           </Paragraph>
         </View>
         <View style={styles.fp}>
-          <Image source={require('../assets/fp.png')} />
+          <Image source={fp} />
           <Paragraph style={{fontSize: 16, marginTop: 15}}>
             Touch the fingerprint sensor
           </Paragraph>

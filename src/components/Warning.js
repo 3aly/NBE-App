@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {HeadLine, Paragraph} from '../components/StyledComponents';
+import {fp} from '../utils/images';
 
 const Warning = ({setModalVisible, modalVisible}) => {
   return (
@@ -12,7 +13,7 @@ const Warning = ({setModalVisible, modalVisible}) => {
         }}></View>
       <View style={styles.fpcontainer}>
         <View style={styles.fp}>
-          <Image source={require('../assets/fp.png')} />
+          <Image source={fp} />
           <Paragraph style={{fontSize: 16, marginTop: 15}}>
             Please Sign in
           </Paragraph>

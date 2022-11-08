@@ -22,6 +22,7 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {dark, light} from '../utils/theme/colors';
 import {useEffect} from 'react';
+import {biglogo, biglogod, logogreen, logogreend} from '../utils/images';
 const SplashScreen = ({navigation}) => {
   const {darkmode} = useSelector(state => state.theme);
   const {isLoggedIn} = useSelector(state => state.user);
@@ -38,22 +39,10 @@ const SplashScreen = ({navigation}) => {
         {backgroundColor: darkmode ? dark.bg : light.bg},
       ]}>
       <View>
-        <Image
-          source={
-            darkmode
-              ? require('../assets/biglogod.png')
-              : require('../assets/biglogo.png')
-          }
-        />
+        <Image source={darkmode ? biglogod : biglogo} />
       </View>
       <View>
-        <Image
-          source={
-            darkmode
-              ? require('../assets/logogreend.png')
-              : require('../assets/logogreen.png')
-          }
-        />
+        <Image source={darkmode ? logogreend : logogreen} />
       </View>
     </View>
   );

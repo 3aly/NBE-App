@@ -20,6 +20,7 @@ import {
 import styled from 'styled-components';
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {logo, man} from '../utils/images';
 const Finish = ({navigation}) => {
   const {lang} = useSelector(state => state);
 
@@ -31,7 +32,7 @@ const Finish = ({navigation}) => {
           resizeMode: 'cover',
           alignSelf: 'flex-end',
         }}
-        source={require('../assets/man.png')}
+        source={man}
         style={styles.image}>
         <Column
           style={{
@@ -39,7 +40,7 @@ const Finish = ({navigation}) => {
             paddingHorizontal: 10,
           }}>
           <Image
-            source={require('../assets/logo.png')}
+            source={logo}
             style={{alignSelf: 'flex-end', marginVertical: 20}}
           />
           <Column arabic={lang.langArabic}>

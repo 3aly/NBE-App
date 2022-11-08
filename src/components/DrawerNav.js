@@ -7,6 +7,20 @@ import CustomDrawer from './CustomDrawer';
 import {TabNavigator} from '../components/app.navigator';
 import {useDispatch, useSelector} from 'react-redux';
 import {dark, light} from '../utils/theme/colors';
+import {
+  acountsummery,
+  acountsummeryd,
+  calculator,
+  cardserv,
+  costumerserv,
+  drawericon,
+  drawericond,
+  hardtoken,
+  noti,
+  offers,
+  opencert,
+  paymentserv,
+} from '../utils/images';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = ({navigation}) => {
@@ -29,13 +43,7 @@ const DrawerNav = ({navigation}) => {
             <TouchableOpacity
               style={{margin: 14}}
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-              <Image
-                source={
-                  darkmode
-                    ? require('../assets/drawericond.png')
-                    : require('../assets/drawericon.png')
-                }
-              />
+              <Image source={darkmode ? drawericond : drawericon} />
             </TouchableOpacity>
           ),
           headerRight: () => (
@@ -60,7 +68,7 @@ const DrawerNav = ({navigation}) => {
                 </Column>
               </Row>
               <TouchableOpacity style={styles.notification}>
-                <Image source={require('../assets/noti.png')} />
+                <Image source={noti} />
               </TouchableOpacity>
             </Row>
           ),
@@ -101,11 +109,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={
-                  darkmode
-                    ? require('../assets/acountsummeryd.png')
-                    : require('../assets/acountsummery.png')
-                }
+                source={darkmode ? acountsummeryd : acountsummery}
                 style={[
                   langArabic
                     ? {
@@ -138,7 +142,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/opencert.png')}
+                source={opencert}
                 style={[
                   langArabic
                     ? {
@@ -169,7 +173,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/paymentserv.png')}
+                source={paymentserv}
                 style={[
                   langArabic
                     ? {
@@ -200,7 +204,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/cardserv.png')}
+                source={cardserv}
                 style={[
                   langArabic
                     ? {
@@ -231,7 +235,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/hardtoken.png')}
+                source={hardtoken}
                 style={[
                   langArabic
                     ? {
@@ -262,7 +266,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/offers.png')}
+                source={offers}
                 style={[
                   langArabic
                     ? {
@@ -293,7 +297,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/costumerserv.png')}
+                source={costumerserv}
                 style={[
                   langArabic
                     ? {
@@ -324,7 +328,7 @@ const DrawerNav = ({navigation}) => {
             headerTitle: '',
             drawerIcon: ({focused}) => (
               <Image
-                source={require('../assets/calculator.png')}
+                source={calculator}
                 style={[
                   langArabic
                     ? {

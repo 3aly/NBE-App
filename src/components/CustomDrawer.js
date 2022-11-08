@@ -13,6 +13,17 @@ import {SignOut} from '../utils/FireBase/firebase.config';
 import {toggler} from '../utils/Redux/store/LangSlice';
 
 import DarkMode, {ThemeToggler} from '../utils/Redux/store/DarkMode';
+import {
+  ar,
+  en,
+  fullogo,
+  fullogod,
+  darkmodepic,
+  darkmodepicd,
+  logout,
+  dotmenud,
+  dotmenu,
+} from '../utils/images';
 
 const CustomDrawer = props => {
   const {user} = useSelector(state => state);
@@ -39,20 +50,12 @@ const CustomDrawer = props => {
           marginTop: 10,
         }}
         arabic={langArabic}>
-        {darkmode ? (
-          <Image source={require('../assets/fullogod.png')} />
-        ) : (
-          <Image source={require('../assets/fullogo.png')} />
-        )}
+        {darkmode ? <Image source={fullogod} /> : <Image source={fullogo} />}
         <TouchableOpacity
           onPress={() => {
             dispatch(toggler());
           }}>
-          {langArabic ? (
-            <Image source={require('../assets/en.png')} />
-          ) : (
-            <Image source={require('../assets/ar.png')} />
-          )}
+          {langArabic ? <Image source={en} /> : <Image source={ar} />}
         </TouchableOpacity>
       </Row>
       <DrawerContentScrollView {...props}>
@@ -75,13 +78,7 @@ const CustomDrawer = props => {
           <Row
             style={{justifyContent: 'space-between', width: 107}}
             arabic={langArabic}>
-            <Image
-              source={
-                darkmode
-                  ? require('../assets/darkmoded.png')
-                  : require('../assets/darkmode.png')
-              }
-            />
+            <Image source={darkmode ? darkmodepicd : darkmodepic} />
             <Paragraph
               style={{fontWeight: 'bold', color: darkmode ? 'white' : 'black'}}>
               {langArabic ? 'الوضع المظلم' : 'DarkMode'}
@@ -116,7 +113,7 @@ const CustomDrawer = props => {
             }}
             onPress={LogOut}>
             <Row arabic={langArabic} style={{marginHorizontal: 10}}>
-              <Image source={require('../assets/logout.png')} />
+              <Image source={logout} />
 
               <Paragraph
                 style={{
@@ -166,11 +163,7 @@ const CustomDrawer = props => {
                 <Image
                   style={{margin: 20}}
                   resizeMode="contain"
-                  source={
-                    darkmode
-                      ? require('../assets/dotmenud.png')
-                      : require('../assets/dotmenu.png')
-                  }
+                  source={darkmode ? dotmenud : dotmenu}
                 />
               </TouchableOpacity>
             </Column>
