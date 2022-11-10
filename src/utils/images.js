@@ -48,3 +48,9 @@ export const biglogod = require('../assets/biglogod.png');
 export const biglogo = require('../assets/biglogo.png');
 export const logogreend = require('../assets/logogreend.png');
 export const logogreen = require('../assets/logogreen.png');
+
+export const x = require('../assets/x.png');
+
+export const whitedot = require('../assets/whiredot.png');
+
+export const greendot = require('../assets/greendot.png');

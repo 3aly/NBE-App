@@ -34,6 +34,7 @@ import Warning from '../components/Warning';
 import {getIn} from '../utils/FireBase/firebase.config';
 import {log} from 'react-native-reanimated';
 import {ar, at, en, lady, logo, lock, eye, register} from '../utils/images';
+import {SheetManager} from 'react-native-actions-sheet';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -50,19 +51,23 @@ const SignIn = ({navigation}) => {
 
   const login = async (email, password) => {
     const {user} = await getIn(email, password);
+    console.log(user, 'user');
+    if (user === undefined) {
+      SheetManager.show('example-sheet');
+      return;
+    } else {
+      dispatch(
+        setCurrentUser({
+          displayName: user.displayName,
+          email: user.email,
+          isLoggedIn: !isLoggedIn,
+          photoURL: user.photoURL,
+          phoneNumber: user.phoneNumber,
+        }),
+      );
 
-    console.log(isLoggedIn);
-
-    dispatch(
-      setCurrentUser({
-        displayName: user.displayName,
-        email: user.email,
-        isLoggedIn: !isLoggedIn,
-        photoURL: user.photoURL,
-        phoneNumber: user.phoneNumber,
-      }),
-    );
-    console.log(isLoggedIn);
+      navigation.navigate('finish');
+    }
   };
   return (
     <ImageBackground source={lady} style={styles.image}>
@@ -160,7 +165,7 @@ const SignIn = ({navigation}) => {
 
         <Row
           style={{
-            width: 350,
+            width: '85%',
             color: 'white',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -184,11 +189,12 @@ const SignIn = ({navigation}) => {
             <Text style={styles.label}>Forgot password?</Text>
           )}
         </Row>
-        <ButtonContianer arabic={lang.langArabic}>
+        <ButtonContianer
+          style={{paddingHorizontal: '6%'}}
+          arabic={lang.langArabic}>
           <StyledButton
             onPress={() => {
               login(email, password);
-              navigation.navigate('finish');
             }}>
             {lang.langArabic ? (
               <Text style={styles.buttontext}>تسجيل دخول</Text>

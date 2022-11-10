@@ -46,9 +46,14 @@ export const CreateAnAccount = async (email, password) => {
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 export const getIn = async (email, password) => {
-  if (!email || !password) return;
+  if (!email || !password) return undefined;
 
-  return await signInWithEmailAndPassword(auth, email, password);
+  return await signInWithEmailAndPassword(auth, email, password).catch(
+    error => {
+      console.log('error');
+      return {error: true};
+    },
+  );
 };
 
 export const updater = async (displayName, phoneNumber, photoURL) => {

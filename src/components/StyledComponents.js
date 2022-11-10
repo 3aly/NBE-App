@@ -45,7 +45,6 @@ export const ButtonContianer = styled(View)`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0% 10%;
   text-align: end;
 `;
 export const HeadLine = styled(Text)`
@@ -54,8 +53,16 @@ export const HeadLine = styled(Text)`
   font-size: 30px;
 `;
 export const Paragraph = styled(Text)`
-  color: #ffff;
+  color: '#ffff';
   font-weight: 400;
   font-size: 16px;
+  line-height: 19px;
+`;
+
+export const WhiteText = styled(Text)`
+  color: 'white';
+  font-weight: 400;
+  margin: 5%;
+  font-size: 14px;
   line-height: 19px;
 `;

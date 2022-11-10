@@ -4,20 +4,14 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 import {
-  StyledButton,
-  StyledInput,
-  ButtonContianer,
-  Row,
   Column,
   HeadLine,
   Paragraph,
+  WhiteText,
 } from '../components/StyledComponents';
-import styled from 'styled-components';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {logo, man} from '../utils/images';
@@ -47,16 +41,16 @@ const Finish = ({navigation}) => {
             {lang.langArabic ? (
               <>
                 <HeadLine>مبروك</HeadLine>
-                <Paragraph>
+                <Text style={{color: 'white', fontSize: 16}}>
                   دلوقتي تقدر تستخدم الخدمات الالكترونية للبنك الأهلي المصري
-                </Paragraph>
+                </Text>
               </>
             ) : (
               <>
                 <HeadLine>Congratulations</HeadLine>
-                <Paragraph>
+                <Text style={{color: 'white', fontSize: 16}}>
                   You have successfully registered in NBE online banking service
-                </Paragraph>
+                </Text>
               </>
             )}
           </Column>
