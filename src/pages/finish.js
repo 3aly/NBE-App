@@ -38,21 +38,16 @@ const Finish = ({navigation}) => {
             style={{alignSelf: 'flex-end', marginVertical: 20}}
           />
           <Column arabic={lang.langArabic}>
-            {lang.langArabic ? (
-              <>
-                <HeadLine>مبروك</HeadLine>
-                <Text style={{color: 'white', fontSize: 16}}>
-                  دلوقتي تقدر تستخدم الخدمات الالكترونية للبنك الأهلي المصري
-                </Text>
-              </>
-            ) : (
-              <>
-                <HeadLine>Congratulations</HeadLine>
-                <Text style={{color: 'white', fontSize: 16}}>
-                  You have successfully registered in NBE online banking service
-                </Text>
-              </>
-            )}
+            <>
+              <HeadLine>
+                {lang.langArabic ? 'مبروك' : 'Congratulations'}
+              </HeadLine>
+              <Text style={{color: 'white', fontSize: 16}}>
+                {lang.langArabic
+                  ? 'دلوقتي تقدر تستخدم الخدمات الالكترونية للبنك الأهلي المصري'
+                  : 'You have successfully registered in NBE online banking service'}
+              </Text>
+            </>
           </Column>
         </Column>
 

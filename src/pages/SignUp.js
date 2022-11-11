@@ -38,6 +38,22 @@ import {
 } from '../utils/images';
 import {Formik} from 'formik';
 
+import * as yup from 'yup';
+import {Chekcer} from '../utils/Redux/store/PassValid';
+
+const SignupSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please Enter a valid email')
+    .required('Email Adress is required'),
+  // password: yup.string().required().min(8, 'must be 8'),
+
+  // confirmPassword: yup
+  //   .string()
+  //   .required()
+  //   .oneOf([yup.ref('password'), null], 'Passwords must match'),
+});
+
 const SignUp = ({navigation}) => {
   const {lang} = useSelector(state => state);
 
@@ -67,6 +83,36 @@ const SignUp = ({navigation}) => {
     );
     navigation.navigate('finish');
   };
+
+  const {min8, specialchar, lowercase, onenumber, uppercase} = useSelector(
+    state => state.passval,
+  );
+
+  const [password, setPassword] = useState('');
+  const validatepass = pass => {
+    console.log(pass);
+
+    const min = pass.length <= 8 ? false : true;
+    console.log(min);
+    up = pass.match(/[A-Z]/g);
+    down = pass.match(/[a-z]/g);
+    spec = pass.match(/[!`@#$%^&*()_+><>?":}]/g);
+    num = pass.match(/[0-9]/g);
+    console.log(spec, 'spec', num, 'num');
+
+    dispatch(
+      Chekcer({
+        min8: min,
+        uppercase: up ? true : false,
+        lowercase: down ? true : false,
+        specialchar: spec ? true : false,
+        onenumber: num ? true : false,
+        all: false,
+      }),
+    );
+  };
+
+  validatepass(password);
   return (
     <ImageBackground source={lady} style={styles.image}>
       <View style={styles.contianer}>
@@ -88,9 +134,9 @@ const SignUp = ({navigation}) => {
             displayName: '',
             email: '',
             pohtoURL: '',
-            password: '',
             confirmPassword: '',
           }}
+          validationSchema={SignupSchema}
           onSubmit={values => {
             Register(
               values.displayName,
@@ -140,6 +186,7 @@ const SignUp = ({navigation}) => {
                     value={props.values.displayName}
                   />
                 </Row>
+
                 <Row
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -230,9 +277,10 @@ const SignUp = ({navigation}) => {
                     secureTextEntry={isSecure}
                     name="password"
                     textAlign={lang.langArabic ? 'right' : 'left'}
-                    onChangeText={props.handleChange('password')}
-                    value={props.values.password}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
                   />
+
                   <TouchableOpacity
                     onPress={() => {
                       setIsSecure(!isSecure);
@@ -244,6 +292,10 @@ const SignUp = ({navigation}) => {
                     <Image source={eye} />
                   </TouchableOpacity>
                 </Row>
+                {props.errors.password && props.touched.password
+                  ? console.log(props.errors)
+                  : null}
+
                 <Row
                   style={{
                     border: 1.5,
@@ -292,19 +344,19 @@ const SignUp = ({navigation}) => {
                   }}>
                   <Column>
                     <Row>
-                      <Image source={whitedot} />
+                      <Image source={lowercase ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
                         Lower case letter
                       </WhiteText>
                     </Row>
                     <Row>
-                      <Image source={greendot} />
+                      <Image source={min8 ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
                         Minimum 8 characters
                       </WhiteText>
                     </Row>
                     <Row>
-                      <Image source={whitedot} />
+                      <Image source={specialchar ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
                         Special character
                       </WhiteText>
@@ -312,13 +364,13 @@ const SignUp = ({navigation}) => {
                   </Column>
                   <Column>
                     <Row>
-                      <Image source={whitedot} />
+                      <Image source={uppercase ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
                         Upper case letter
                       </WhiteText>
                     </Row>
                     <Row>
-                      <Image source={whitedot} />
+                      <Image source={onenumber ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>Number</WhiteText>
                     </Row>
                   </Column>
