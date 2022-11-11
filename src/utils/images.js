@@ -22,6 +22,7 @@ export const logout = require('../assets/logout.png');
 export const dotmenud = require('../assets/dotmenud.png');
 export const dotmenu = require('../assets/dotmenu.png');
 export const drawericond = require('../assets/drawericond.png');
+export const drawericon = require('../assets/drawericon.png');
 
 export const noti = require('../assets/noti.png');
 export const acountsummeryd = require('../assets/acountsummeryd.png');
@@ -34,6 +35,8 @@ export const offers = require('../assets/offers.png');
 export const costumerserv = require('../assets/costumerserv.png');
 export const calculator = require('../assets/calculator.png');
 export const fp = require('../assets/fp.png');
+export const fpd = require('../assets/fpd.png');
+
 export const marker = require('../assets/marker.png');
 export const googlelogo = require('../assets/googlelogo.png');
 export const man = require('../assets/man.png');
@@ -54,3 +57,4 @@ export const x = require('../assets/x.png');
 export const whitedot = require('../assets/whiredot.png');
 
 export const greendot = require('../assets/greendot.png');
+export const warning = require('../assets/warning.png');

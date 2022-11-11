@@ -6,6 +6,7 @@ const initialState = {
   lowercase: false,
   specialchar: false,
   onenumber: false,
+  match: false,
   all: false,
 };
 
@@ -25,13 +26,16 @@ export const PassValid = createSlice({
       state.lowercase = action.payload.lowercase;
       state.specialchar = action.payload.specialchar;
       state.onenumber = action.payload.onenumber;
+      state.match = action.payload.match;
+
       state.all =
         action.payload.min8 &&
         action.payload.onenumber &&
         action.payload.min8 &&
         action.payload.uppercase &&
         action.payload.lowercase &&
-        action.payload.specialchar;
+        action.payload.specialchar &&
+        action.payload.match;
     },
   },
 });

@@ -1,13 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 
 export const StyledInput = styled(TextInput)`

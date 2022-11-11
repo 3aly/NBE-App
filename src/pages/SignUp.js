@@ -37,11 +37,13 @@ import {
   whitedot,
 } from '../utils/images';
 import {Formik} from 'formik';
+import {SheetManager} from 'react-native-actions-sheet';
 
 import * as yup from 'yup';
 import {Chekcer} from '../utils/Redux/store/PassValid';
 
 const SignupSchema = yup.object().shape({
+  displayName: yup.string().required('Userame Adress is required'),
   email: yup
     .string()
     .email('Please Enter a valid email')
@@ -84,12 +86,13 @@ const SignUp = ({navigation}) => {
     navigation.navigate('finish');
   };
 
-  const {min8, specialchar, lowercase, onenumber, uppercase} = useSelector(
-    state => state.passval,
-  );
+  const {match, all, min8, specialchar, lowercase, onenumber, uppercase} =
+    useSelector(state => state.passval);
 
   const [password, setPassword] = useState('');
-  const validatepass = pass => {
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const validatepass = (pass, confirmPass) => {
     console.log(pass);
 
     const min = pass.length <= 8 ? false : true;
@@ -99,7 +102,7 @@ const SignUp = ({navigation}) => {
     spec = pass.match(/[!`@#$%^&*()_+><>?":}]/g);
     num = pass.match(/[0-9]/g);
     console.log(spec, 'spec', num, 'num');
-
+    console.log(pass, confirmPass, pass === confirmPass, 'passm confpass');
     dispatch(
       Chekcer({
         min8: min,
@@ -107,12 +110,12 @@ const SignUp = ({navigation}) => {
         lowercase: down ? true : false,
         specialchar: spec ? true : false,
         onenumber: num ? true : false,
-        all: false,
+        match: pass === '' ? false : pass === confirmPass ? true : false,
       }),
     );
   };
 
-  validatepass(password);
+  validatepass(password, confirmPassword);
   return (
     <ImageBackground source={lady} style={styles.image}>
       <View style={styles.contianer}>
@@ -134,14 +137,20 @@ const SignUp = ({navigation}) => {
             displayName: '',
             email: '',
             pohtoURL: '',
-            confirmPassword: '',
+            password: password,
+            confirmPassword: confirmPassword,
           }}
           validationSchema={SignupSchema}
           onSubmit={values => {
+            console.log(all, 'all');
+            if (!all) {
+              SheetManager.show('WeakPassSheet');
+              return;
+            }
             Register(
               values.displayName,
               values.email,
-              values.password,
+              password,
               values.phoneNumber,
               values.photoURL,
             );
@@ -153,6 +162,7 @@ const SignUp = ({navigation}) => {
                   justifyContent: 'space-between',
                   alignContent: 'space-between',
                   width: '85%',
+                  height: '85%',
                 }}>
                 <Row
                   style={{
@@ -161,7 +171,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 70,
+                    height: 65,
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -186,7 +196,13 @@ const SignUp = ({navigation}) => {
                     value={props.values.displayName}
                   />
                 </Row>
-
+                {props.errors.displayName && props.touched.displayName && (
+                  <Row style={{backgroundColor: 'white', borderRadius: 5}}>
+                    <Text style={styles.errors}>
+                      {props.errors.displayName}
+                    </Text>
+                  </Row>
+                )}
                 <Row
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -194,7 +210,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 70,
+                    height: 65,
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -215,10 +231,15 @@ const SignUp = ({navigation}) => {
                     placeholderTextColor="#ffff"
                     color={'white'}
                     name="email"
-                    onChangeText={props.handleChange('email')}
+                    ب
                     value={props.values.email}
                   />
                 </Row>
+                {props.errors.email && props.touched.email && (
+                  <Row style={{backgroundColor: 'white', borderRadius: 5}}>
+                    <Text style={styles.errors}>{props.errors.email}</Text>
+                  </Row>
+                )}
 
                 <Row
                   style={{
@@ -227,7 +248,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 70,
+                    height: 65,
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -252,6 +273,7 @@ const SignUp = ({navigation}) => {
                     value={props.values.photoURL}
                   />
                 </Row>
+
                 <Row
                   style={{
                     border: 1.5,
@@ -260,7 +282,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
                     borderColor: '#007236',
                     width: '100%',
-                    height: 70,
+                    height: 65,
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -292,10 +314,11 @@ const SignUp = ({navigation}) => {
                     <Image source={eye} />
                   </TouchableOpacity>
                 </Row>
-                {props.errors.password && props.touched.password
-                  ? console.log(props.errors)
-                  : null}
-
+                {props.errors.password && props.touched.password && (
+                  <Row style={{backgroundColor: 'white', borderRadius: 5}}>
+                    <Text style={styles.errors}>{props.errors.password}</Text>
+                  </Row>
+                )}
                 <Row
                   style={{
                     border: 1.5,
@@ -304,7 +327,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
                     borderColor: '#007236',
                     width: '100%',
-                    height: 70,
+                    height: 65,
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -322,10 +345,11 @@ const SignUp = ({navigation}) => {
                     color={'black'}
                     secureTextEntry={isSecure}
                     name="confirmPassword"
-                    onChangeText={props.handleChange('confirmPassword')}
-                    value={props.values.confirmPassword}
+                    onChangeText={text => setConfirmPassword(text)}
+                    value={confirmPassword}
                     textAlign={lang.langArabic ? 'right' : 'left'}
                   />
+
                   <TouchableOpacity
                     onPress={() => {
                       setIsSecure(!isSecure);
@@ -337,41 +361,68 @@ const SignUp = ({navigation}) => {
                     <Image source={eye} />
                   </TouchableOpacity>
                 </Row>
+                {props.errors.confirmPassword && props.touched.confirmPassword && (
+                  <Row style={{backgroundColor: 'white', borderRadius: 5}}>
+                    <Text style={styles.errors}>
+                      {props.errors.confirmPassword}
+                    </Text>
+                  </Row>
+                )}
                 <Row
                   style={{
                     alignItems: 'flex-start',
                     width: '100%',
                   }}>
-                  <Column>
-                    <Row>
+                  <Column
+                    style={{
+                      width: '50%',
+                      justifyContent: 'space-between',
+                    }}
+                    arabic={lang.langArabic}>
+                    <Row arabic={lang.langArabic}>
                       <Image source={lowercase ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
-                        Lower case letter
+                        {lang.langArabic ? 'حرف صغير' : 'Lower case letter'}
                       </WhiteText>
                     </Row>
-                    <Row>
+                    <Row arabic={lang.langArabic}>
                       <Image source={min8 ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
-                        Minimum 8 characters
+                        {lang.langArabic
+                          ? 'علي الأقل 8 احرف'
+                          : 'Minimum 8 characters'}
                       </WhiteText>
                     </Row>
-                    <Row>
+                    <Row arabic={lang.langArabic}>
                       <Image source={specialchar ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
-                        Special character
+                        {lang.langArabic ? 'حرف مميز' : 'Special character'}
                       </WhiteText>
                     </Row>
                   </Column>
-                  <Column>
-                    <Row>
+                  <Column
+                    arabic={lang.langArabic}
+                    style={{
+                      width: '43%',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Row arabic={lang.langArabic}>
                       <Image source={uppercase ? greendot : whitedot} />
                       <WhiteText style={{color: 'white'}}>
-                        Upper case letter
+                        {lang.langArabic ? 'حرف كبير' : 'Upper case letter'}
                       </WhiteText>
                     </Row>
-                    <Row>
+                    <Row arabic={lang.langArabic}>
                       <Image source={onenumber ? greendot : whitedot} />
-                      <WhiteText style={{color: 'white'}}>Number</WhiteText>
+                      <WhiteText style={{color: 'white'}}>
+                        {lang.langArabic ? 'رقم' : 'Number'}
+                      </WhiteText>
+                    </Row>
+                    <Row arabic={lang.langArabic}>
+                      <Image source={match ? greendot : whitedot} />
+                      <WhiteText style={{color: 'white'}}>
+                        {lang.langArabic ? 'رقم سري متطابق' : 'Password Match'}
+                      </WhiteText>
                     </Row>
                   </Column>
                 </Row>
@@ -399,9 +450,9 @@ const SignUp = ({navigation}) => {
                 </ButtonContianer>
                 <Row
                   style={{
-                    width: '85%',
+                    width: '60%',
                     justifyContent: 'space-evenly',
-                    padding: 10,
+                    alignSelf: 'center',
                   }}
                   arabic={lang.langArabic}>
                   <Text
@@ -445,6 +496,11 @@ const SignUp = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  errors: {
+    color: 'red',
+    fontWeightL: 'bold',
+    marginHorizontal: 5,
+  },
   mode: {},
   image: {
     flex: 1,
@@ -465,11 +521,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  form: {
-    padding: 5,
-    justifyContent: 'space-between',
-    marginHorizontal: 18,
-  },
+
   buttons: {
     fontWeight: '700',
   },
