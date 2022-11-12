@@ -58,3 +58,9 @@ export const whitedot = require('../assets/whiredot.png');
 
 export const greendot = require('../assets/greendot.png');
 export const warning = require('../assets/warning.png');
+export const card1 = require('../assets/card1.png');
+export const card2 = require('../assets/card2.png');
+export const card3 = require('../assets/card3.png');
+export const card1d = require('../assets/card1d.png');
+export const card2d = require('../assets/card2d.png');
+export const card3d = require('../assets/card3d.png');

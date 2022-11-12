@@ -57,3 +57,10 @@ export const WhiteText = styled(Text)`
   font-size: 14px;
   line-height: 19px;
 `;
+
+export const ButtonText = styled(Text)`
+  color: white;
+  font-weight: bold;
+  margin: 5%;
+  font-size: 18px;
+`;

@@ -27,7 +27,7 @@ import SignIn from '../pages/SignIn';
 import SplashScreen from '../pages/SplashScreen';
 import Home from '../pages/Home';
 import Transfer from '../pages/Transfer';
-import AirPay from '../pages/AirPay';
+import AirPay from '../pages/AirPay/AirPay';
 import Atms from '../pages/Atms';
 import Benfits from '../pages/Benfits';
 import NavBar from '../components/DrawerNav';
@@ -223,7 +223,7 @@ export const TabNavigator = () => {
         />
         <Tab.Screen
           name="AirPay"
-          component={Dummy}
+          component={AirPay}
           options={{
             tabBarIcon: ({focused}) => (
               <View
