@@ -64,3 +64,7 @@ export const card3 = require('../assets/card3.png');
 export const card1d = require('../assets/card1d.png');
 export const card2d = require('../assets/card2d.png');
 export const card3d = require('../assets/card3d.png');
+export const back = require('../assets/back.png');
+export const cardf = require('../assets/cardf.png');
+export const cards = require('../assets/cards.png');
+export const sucess = require('../assets/sucess.png');

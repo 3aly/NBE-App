@@ -14,6 +14,7 @@ import {Provider} from 'react-redux';
 import {store} from './src/utils/Redux/store/store';
 import {SheetProvider} from 'react-native-actions-sheet';
 import './src/components/sheets';
+import {Otp} from './src/pages/Otp/Otp';
 
 const AuthStack = createStackNavigator();
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
               <AuthStack.Screen name="signup" component={SignUp} />
               <AuthStack.Screen name="finish" component={Finish} /> */}
               <AuthStack.Screen name="all" component={DrawerNav} />
+              <AuthStack.Screen name="otp" component={Otp} />
             </AuthStack.Navigator>
           </NavigationContainer>
         </SheetProvider>

@@ -64,3 +64,8 @@ export const ButtonText = styled(Text)`
   margin: 5%;
   font-size: 18px;
 `;
+export const BoldText = styled(Text)`
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+`;

@@ -8,17 +8,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {ButtonText, Row, StyledButton} from '../../components/StyledComponents';
 import {card1, card1d, card2, card2d, card3, card3d} from '../../utils/images';
 import {DraxProvider, DraxView} from 'react-native-drax';
 import {useState} from 'react';
-
-const AirPay = () => {
+import {createStackNavigator} from '@react-navigation/stack';
+import {SheetManager} from 'react-native-actions-sheet';
+import {proceedotptoggler} from '../../utils/Redux/store/router';
+const AirPay = ({navigation}) => {
   const {langArabic} = useSelector(state => state.lang);
   const {darkmode} = useSelector(state => state.theme);
+  const {proceedotp} = useSelector(state => state.router);
 
   const [received, setReceived] = useState([]);
+  const [randomizer, setRandomizer] = useState(false);
+
+  const stack = createStackNavigator();
+  const dispatch = useDispatch();
   console.log(received, 'recived');
   return (
     <DraxProvider>
@@ -28,23 +35,21 @@ const AirPay = () => {
           {backgroundColor: darkmode ? '#1f2933' : '#f1f3fb'},
         ]}>
         <Row>
-          <ScrollView horizontal={true}>
-            <FlatList
-              horizontal={true}
-              data={darkmode ? [card1d, card2d, card3d] : [card1, card2, card3]}
-              renderItem={({item, index}) => (
-                <DraxView
-                  key={index}
-                  draggingStyle={styles.dragging}
-                  dragReleasedStyle={styles.dragging}
-                  hoverDraggingStyle={styles.hoverDragging}
-                  dragPayload={item}
-                  longPressDelay={100}>
-                  <Image style={{marginHorizontal: 4}} source={item} />
-                </DraxView>
-              )}
-            />
-          </ScrollView>
+          <FlatList
+            horizontal={true}
+            data={darkmode ? [card1d, card2d, card3d] : [card1, card2, card3]}
+            renderItem={({item, index}) => (
+              <DraxView
+                key={index}
+                draggingStyle={styles.dragging}
+                dragReleasedStyle={styles.dragging}
+                hoverDraggingStyle={styles.hoverDragging}
+                dragPayload={item}
+                longPressDelay={100}>
+                <Image style={{marginHorizontal: 4}} source={item} />
+              </DraxView>
+            )}
+          />
         </Row>
         <Row style={{height: '40%', alignItems: 'center'}}>
           <DraxView
@@ -62,8 +67,15 @@ const AirPay = () => {
                     {received.length != 0 ? (
                       ''
                     ) : (
-                      <Text style={{color: '#007236', fontSize: 15}}>
-                        Touch & hold a card then drag it to this box
+                      <Text
+                        style={{
+                          color: '#007236',
+                          fontSize: 17,
+                          fontWeight: 'bold',
+                        }}>
+                        {langArabic
+                          ? 'اختار واحد من الكروت و اسحبه جوا المربع'
+                          : 'Touch & hold a card then drag it to this box'}
                       </Text>
                     )}
 
@@ -84,9 +96,9 @@ const AirPay = () => {
           <StyledButton
             onPress={() => {
               if (received.length != 0) {
-                console.log('proceed');
+                navigation.navigate('otp');
               } else {
-                console.log('please select a card');
+                SheetManager.show('emptycard');
               }
             }}>
             <ButtonText>{langArabic ? 'ادفع دلوقتي' : 'Pay Now'}</ButtonText>

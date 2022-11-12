@@ -35,6 +35,7 @@ import {useSelector} from 'react-redux';
 import {dark, light} from '../utils/theme/colors';
 import Dummy from '../pages/Dummy';
 import {airpay, atms, beneficiaries, home, transfer} from '../utils/images';
+import {AirPayStack} from '../pages/AirPayStack/AirPayStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -222,8 +223,8 @@ export const TabNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="AirPay"
-          component={AirPay}
+          name="AirPayStack"
+          component={AirPayStack}
           options={{
             tabBarIcon: ({focused}) => (
               <View
