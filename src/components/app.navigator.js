@@ -60,8 +60,8 @@ export const TabNavigator = () => {
           },
         }}>
         <Tab.Screen
-          name="SignIn"
-          component={Dummy}
+          name="home"
+          component={Home}
           options={{
             tabBarIcon: ({focused}) => (
               <View

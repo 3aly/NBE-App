@@ -1,4 +1,4 @@
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import styled from 'styled-components';
 
 export const StyledInput = styled(TextInput)`
@@ -23,6 +23,16 @@ export const StyledButton = styled(TouchableOpacity)`
   border-radius: 12.5px;
   align-items: center;
   justify-content: center;
+`;
+export const CancelButton = styled(TouchableOpacity)`
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  border-radius: 12.5px;
+  align-items: center;
+  border: 1px solid #eb001b;
+  justify-content: center;
+  color: #eb001b;
 `;
 export const Row = styled(View)`
   display: flex;
@@ -56,6 +66,10 @@ export const WhiteText = styled(Text)`
   margin: 5%;
   font-size: 14px;
   line-height: 19px;
+`;
+export const CommonText = styled(Text)`
+  font-weight: 400;
+  font-size: 16px;
 `;
 
 export const ButtonText = styled(Text)`

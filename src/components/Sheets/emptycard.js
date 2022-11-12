@@ -8,6 +8,7 @@ import {cardf, sucess} from '../../utils/images';
 import {
   BoldText,
   ButtonText,
+  CancelButton,
   Column,
   Row,
   StyledButton,
@@ -35,13 +36,16 @@ export const emptycard = props => {
             ? 'عملية الدفع غير ناجحة'
             : 'Your payment didn’t go through'}
         </Text>
-        <Row style={{width: '90%', height: '20%'}}>
-          <StyledButton
+        <Row style={{marginTop: '5%'}}>
+          <CancelButton
+            style={{width: '60%', height: '100%'}}
             onPress={() => {
               SheetManager.hide('emptycard');
             }}>
-            <ButtonText>{langArabic ? 'انهاء' : 'Finish'}</ButtonText>
-          </StyledButton>
+            <ButtonText style={{color: '#EB001B'}}>
+              {langArabic ? 'الغاء' : 'Cancel'}
+            </ButtonText>
+          </CancelButton>
         </Row>
       </Column>
     </ActionSheet>
