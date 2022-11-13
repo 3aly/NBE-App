@@ -134,7 +134,7 @@ export const TabNavigator = () => {
         />
         <Tab.Screen
           name="Benfits"
-          component={Dummy}
+          component={Benfits}
           options={{
             tabBarIcon: ({focused}) => (
               <View
@@ -179,7 +179,8 @@ export const TabNavigator = () => {
         />
         <Tab.Screen
           name="Transfer"
-          component={Dummy}
+          component={Transfer}
+          headerShown={false}
           options={{
             tabBarIcon: ({focused}) => (
               <View

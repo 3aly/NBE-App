@@ -34,6 +34,7 @@
     "react-native-drag-drop-and-swap": "^0.1.6",
     "react-native-draggable": "^3.3.0",
     "react-native-drax": "^0.10.3",
+    "react-native-dropdown-select-list": "^2.0.2",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-maps": "^1.3.2",
     "react-native-modal": "^13.0.1",

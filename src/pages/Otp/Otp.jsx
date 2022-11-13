@@ -14,9 +14,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {SheetManager} from 'react-native-actions-sheet';
 import {proceedotptoggler} from '../../utils/Redux/store/router';
 export const Otp = ({navigation}) => {
-  const gotoAirPay = () => {
-    navigation.goBack();
-  };
   const [pass, setpass] = useState(false);
   const {langArabic} = useSelector(state => state.lang);
   const {proceedotp} = useSelector(state => state.router);
@@ -33,7 +30,10 @@ export const Otp = ({navigation}) => {
             marginBottom: 20,
           }}
           arabic={langArabic}>
-          <TouchableOpacity onPress={gotoAirPay}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
             <Image source={back} />
           </TouchableOpacity>
           <Image source={fullogo} />
@@ -80,7 +80,7 @@ export const Otp = ({navigation}) => {
             if (pass) {
               SheetManager.show('successcard');
               SheetManager.show('otpsucess');
-              gotoAirPay();
+              navigation.goBack();
             } else {
               SheetManager.show('emptycard');
             }

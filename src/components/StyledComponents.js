@@ -83,3 +83,8 @@ export const BoldText = styled(Text)`
   font-weight: bold;
   font-size: 15px;
 `;
+
+export const BigText = styled(Text)`
+  color: black;
+  font-size: 20px;
+`;
