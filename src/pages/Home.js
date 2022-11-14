@@ -168,8 +168,11 @@ export default function Home({navigation}) {
             width: '90%',
             alignItems: 'flex-start',
             paddingVertical: 18,
-          }}>
-          <CommonText style={{color: 'white'}}>Balance</CommonText>
+          }}
+          arabic={langArabic}>
+          <CommonText style={{color: 'white'}}>
+            {langArabic ? 'الحساب' : 'Balance'}
+          </CommonText>
           <TouchableOpacity
             onPress={() => {
               SheetManager.show('fpsheet');
@@ -184,7 +187,11 @@ export default function Home({navigation}) {
               setVisible(!visible);
             }}>
             <HeadLine style={{fontSize: 25}}>
-              {visible ? '$2,374,654.25' : 'Press here to show balance'}
+              {visible
+                ? '$2,374,654.25'
+                : langArabic
+                ? 'دوس هنا عشان تظهر حسابك'
+                : 'Press here to show balance'}
             </HeadLine>
           </TouchableOpacity>
         </Row>
@@ -210,13 +217,18 @@ export default function Home({navigation}) {
         </TouchableOpacity>
       </Row>
       <Row
-        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}>
-        <BoldText style={{fontSize: 20}}>Send money</BoldText>
+        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}
+        arabic={langArabic}>
+        <BoldText style={{fontSize: 20}} dark={darkmode}>
+          {langArabic ? 'ابعت فلوس' : 'Send money'}
+        </BoldText>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Benfits');
           }}>
-          <CommonText>View All</CommonText>
+          <CommonText dark={darkmode}>
+            {langArabic ? 'جميع المستفيدين' : 'View All'}
+          </CommonText>
         </TouchableOpacity>
       </Row>
       <Row style={{height: '15%'}}>
@@ -251,10 +263,15 @@ export default function Home({navigation}) {
         />
       </Row>
       <Row
-        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}>
-        <BoldText style={{fontSize: 20}}>History</BoldText>
+        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}
+        arabic={langArabic}>
+        <BoldText style={{fontSize: 20}} dark={darkmode}>
+          {langArabic ? 'السجل' : 'History'}
+        </BoldText>
         <TouchableOpacity>
-          <CommonText>View All</CommonText>
+          <CommonText dark={darkmode}>
+            {langArabic ? 'جميع العمليات' : 'View All'}
+          </CommonText>
         </TouchableOpacity>
       </Row>
       <Column style={{height: '40%'}}>
@@ -267,8 +284,9 @@ export default function Home({navigation}) {
                   width: '100%',
                   justifyContent: 'space-between',
                   borderBottomWidth: 0.2,
-                }}>
-                <Row>
+                }}
+                arabic={langArabic}>
+                <Row arabic={langArabic}>
                   <TouchableOpacity
                     style={{
                       backgroundColor: 'white',
@@ -289,11 +307,17 @@ export default function Home({navigation}) {
                     />
                   </TouchableOpacity>
                   <Column>
-                    <BoldText>{item.name}</BoldText>
-                    <CommonText>{item.date}</CommonText>
+                    <BoldText
+                      dark={darkmode}
+                      style={{
+                        alignSelf: langArabic ? 'flex-end' : 'flex-start',
+                      }}>
+                      {item.name}
+                    </BoldText>
+                    <CommonText dark={darkmode}>{item.date}</CommonText>
                   </Column>
                 </Row>
-                <BoldText>{item.price}</BoldText>
+                <BoldText dark={darkmode}>{item.price}</BoldText>
               </Row>
             </>
           )}

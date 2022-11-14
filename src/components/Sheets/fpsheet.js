@@ -1,5 +1,5 @@
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import ActionSheet from 'react-native-actions-sheet';
+import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {fp, fpd} from '../../utils/images';
 import {Column, HeadLine, Paragraph, Row} from '../StyledComponents';
@@ -49,7 +49,7 @@ export const fpsheet = props => {
             marginBottom: 10,
             marginStart: 30,
           }}
-          onPress={() => setModalVisible(!modalVisible)}>
+          onPress={() => SheetManager.hide('fpsheet')}>
           <Paragraph style={{color: '#12A759', fontWeight: 'bold'}}>
             {langArabic ? 'الغاء' : 'Cancel'}
           </Paragraph>
@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
     flex: 0.4,
     flexDirection: 'column',
 
-    borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
     justifyContent: 'space-evenly',
   },
   title: {

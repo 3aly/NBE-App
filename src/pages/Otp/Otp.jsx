@@ -5,6 +5,7 @@ import {
   BoldText,
   ButtonText,
   Column,
+  CommonText,
   Row,
   StyledButton,
 } from '../../components/StyledComponents';
@@ -16,10 +17,14 @@ import {proceedotptoggler} from '../../utils/Redux/store/router';
 export const Otp = ({navigation}) => {
   const [pass, setpass] = useState(false);
   const {langArabic} = useSelector(state => state.lang);
-  const {proceedotp} = useSelector(state => state.router);
-  const dispatch = useDispatch();
+  const {darkmode} = useSelector(state => state.theme);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: darkmode ? '#1f2933' : '#f1f3fb'},
+      ]}>
       <Column
         style={{
           flex: 0.8,
@@ -38,35 +43,43 @@ export const Otp = ({navigation}) => {
           </TouchableOpacity>
           <Image source={fullogo} />
         </Row>
-        <BoldText> {langArabic ? 'رمز التأكيد' : 'Verification'}</BoldText>
+        <BoldText dark={darkmode}>
+          {langArabic ? 'رمز التأكيد' : 'Verification'}
+        </BoldText>
         <Row arabic={langArabic}>
-          <Text>
+          <BoldText dark={darkmode}>
             {langArabic
               ? 'اكتب رمز التأكيد الي اتبعت ل '
               : 'Enter 5 digit code we sent to '}
-          </Text>
-          <Text>+20 101 131 5412</Text>
+          </BoldText>
+          <BoldText dark={darkmode}>+20 101 131 5412</BoldText>
         </Row>
 
         <OTPInputView
           pinCount={5}
           style={{width: '80%', height: '20%'}}
           autoFocusOnLoad
-          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputFieldStyle={[
+            styles.underlineStyleBase,
+            {
+              backgroundColor: darkmode ? '#151a21' : 'white',
+              color: darkmode ? 'white' : 'black',
+            },
+          ]}
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
           onCodeFilled={() => {
             setpass(!pass);
           }}
         />
 
-        <Text>
+        <CommonText dark={darkmode}>
           {langArabic ? 'ماستلمتش الكود؟' : 'Didn’t receive the code?'}
-        </Text>
+        </CommonText>
         <Row arabic={langArabic}>
-          <BoldText style={{fontSize: 14}}>
+          <BoldText style={{fontSize: 14}} dark={darkmode}>
             {langArabic ? ' اطلب رمز تاني بعد' : 'Request new one in '}
           </BoldText>
-          <BoldText> 00:12 </BoldText>
+          <BoldText dark={darkmode}> 00:12 </BoldText>
         </Row>
       </Column>
 
@@ -115,9 +128,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    color: 'black',
     fontWeight: 'bold',
-    backgroundColor: 'white',
   },
 
   underlineStyleHighLighted: {

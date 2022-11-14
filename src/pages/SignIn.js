@@ -16,8 +16,7 @@ import {
   Row,
   Column,
 } from '../components/StyledComponents';
-import React, {Component} from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import CheckBox from '@react-native-community/checkbox';
 import {useState} from 'react';
 import FingerprintScreen from './FingerprintScreen';
@@ -27,7 +26,6 @@ import {toggler} from '../utils/Redux/store//LangSlice';
 
 import Warning from '../components/Warning';
 import {getIn} from '../utils/FireBase/firebase.config';
-import {log} from 'react-native-reanimated';
 import {ar, at, en, lady, logo, lock, eye, register} from '../utils/images';
 import {SheetManager} from 'react-native-actions-sheet';
 import {Formik} from 'formik';

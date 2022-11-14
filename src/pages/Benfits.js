@@ -133,8 +133,11 @@ const Benfits = () => {
         alignItems: 'center',
       }}>
       <Row
-        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}>
-        <BoldText style={{fontSize: 20}}>Beneficiaries</BoldText>
+        style={{width: '95%', justifyContent: 'space-between', marginTop: 10}}
+        arabic={langArabic}>
+        <BoldText style={{fontSize: 20}} dark={darkmode}>
+          {langArabic ? 'المستفيدين' : 'Beneficiaries'}
+        </BoldText>
         <Row>
           <TouchableOpacity
             onPress={() => {
@@ -157,10 +160,10 @@ const Benfits = () => {
             renderItem={({item, index}) => (
               <TouchableOpacity
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: darkmode ? '#151a21' : 'white',
                   margin: 10,
                   width: 80,
-                  height: 80,
+                  height: 85,
                   borderRadius: 10,
                   alignContent: 'space-between',
                   justifyContent: 'space-around',
@@ -175,7 +178,7 @@ const Benfits = () => {
                   }}
                   source={item.image}
                 />
-                <BoldText>{item.name}</BoldText>
+                <BoldText dark={darkmode}>{item.name}</BoldText>
               </TouchableOpacity>
             )}
             keyExtractor={item => item.id}
@@ -189,12 +192,13 @@ const Benfits = () => {
               <Row
                 style={{
                   justifyContent: 'space-between',
-                  backgroundColor: 'white',
+                  backgroundColor: darkmode ? '#151a21' : 'white',
                   borderRadius: 18,
                   height: 90,
                   width: '100%',
-                }}>
-                <Row>
+                }}
+                arabic={langArabic}>
+                <Row arabic={langArabic}>
                   <TouchableOpacity
                     style={{
                       backgroundColor: 'white',
@@ -217,21 +221,33 @@ const Benfits = () => {
                     />
                   </TouchableOpacity>
                   <Column>
-                    <BoldText>{item.name}</BoldText>
+                    <BoldText
+                      style={{
+                        alignSelf: langArabic ? 'flex-end' : 'flex-start',
+                      }}
+                      dark={darkmode}>
+                      {item.name}
+                    </BoldText>
                     <Row>
                       <Image source={call} />
-
-                      <CommonText>{item.date}</CommonText>
+                      <CommonText dark={darkmode}>{item.date}</CommonText>
                     </Row>
                     <Row>
                       <Image source={dollar} />
-                      <CommonText>{item.date}</CommonText>
+                      <CommonText dark={darkmode}>{item.date}</CommonText>
                     </Row>
                   </Column>
                 </Row>
 
                 <TouchableOpacity style={{alignSelf: 'flex-start'}}>
-                  <Image source={more} />
+                  <Image
+                    style={{
+                      margin: 10,
+                      backgroundColor: 'black',
+                      borderRadius: 20,
+                    }}
+                    source={more}
+                  />
                 </TouchableOpacity>
               </Row>
             )}

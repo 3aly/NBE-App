@@ -4,8 +4,6 @@ import styled from 'styled-components';
 export const StyledInput = styled(TextInput)`
   display: flex;
   width: 75%;
-  margin: 3%;
-  padding: 4%;
 `;
 export const Column = styled(View)`
   display: flex;
@@ -70,6 +68,7 @@ export const WhiteText = styled(Text)`
 export const CommonText = styled(Text)`
   font-weight: 400;
   font-size: 16px;
+  color: ${props => (props.dark ? `white` : `black`)};
 `;
 
 export const ButtonText = styled(Text)`
@@ -79,12 +78,13 @@ export const ButtonText = styled(Text)`
   font-size: 18px;
 `;
 export const BoldText = styled(Text)`
-  color: black;
+  color: ${props => (props.dark ? `white` : `black`)};
   font-weight: bold;
   font-size: 15px;
 `;
 
 export const BigText = styled(Text)`
-  color: black;
+  color: ${props => (props.dark ? `white` : `black`)};
+
   font-size: 20px;
 `;

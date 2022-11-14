@@ -41,6 +41,7 @@ import {SheetManager} from 'react-native-actions-sheet';
 
 import * as yup from 'yup';
 import {Chekcer} from '../utils/Redux/store/PassValid';
+import {Dropdown} from 'react-native-material-dropdown';
 
 const SignupSchema = yup.object().shape({
   displayName: yup.string().required('Userame Adress is required'),
@@ -203,6 +204,7 @@ const SignUp = ({navigation}) => {
                     </Text>
                   </Row>
                 )}
+                <Dropdown />
                 <Row
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
