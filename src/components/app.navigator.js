@@ -54,7 +54,7 @@ export const TabNavigator = () => {
             position: 'absolute',
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-            height: 85,
+            height: '15%',
 
             backgroundColor: darkmode ? dark.tabnavbg : 'white',
           },
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: 16,
-    width: 70,
-    height: 70,
+    width: '90%',
+    height: '80%',
   },
 });

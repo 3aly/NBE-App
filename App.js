@@ -24,11 +24,11 @@ const App = () => {
         <SheetProvider>
           <NavigationContainer>
             <AuthStack.Navigator screenOptions={{headerShown: false}}>
-              {/* <AuthStack.Screen name="Splash" component={SplashScreen} />
+              <AuthStack.Screen name="Splash" component={SplashScreen} />
 
               <AuthStack.Screen name="signin" component={SignIn} />
               <AuthStack.Screen name="signup" component={SignUp} />
-              <AuthStack.Screen name="finish" component={Finish} /> */}
+              <AuthStack.Screen name="finish" component={Finish} />
               <AuthStack.Screen name="all" component={DrawerNav} />
               <AuthStack.Screen name="otp" component={Otp} />
             </AuthStack.Navigator>

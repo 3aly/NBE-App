@@ -114,10 +114,10 @@ const SignIn = ({navigation}) => {
                     borderColor: 'rgba(255, 255, 255, 0.5)',
                     borderWidth: 1.5,
 
-                    width: 350,
+                    width: '95%',
                     border: 1.5,
                     borderRadius: 10,
-                    height: 70,
+                    height: '20%',
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -149,8 +149,8 @@ const SignIn = ({navigation}) => {
                     backgroundColor: 'white',
                     borderWidth: 1.5,
                     borderColor: '#007236',
-                    width: 350,
-                    height: 70,
+                    width: '95%',
+                    height: '20%',
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -176,7 +176,7 @@ const SignIn = ({navigation}) => {
                     }}
                     style={{
                       alignSelf: 'flex-end',
-                      marginBottom: 10,
+                      marginBottom: '3%',
                     }}>
                     <Image source={eye} />
                   </TouchableOpacity>
@@ -228,7 +228,6 @@ const SignIn = ({navigation}) => {
                 <Row
                   style={{
                     justifyContent: 'space-between',
-                    padding: 10,
                     width: '55%',
                     alignSelf: 'center',
                   }}
@@ -263,7 +262,7 @@ const SignIn = ({navigation}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}
-        style={{position: 'absolute', top: 150}}>
+        style={{position: 'absolute', top: '20%'}}>
         <>
           <FingerprintScreen
             setModalVisible={setModalVisible}
@@ -294,7 +293,7 @@ const styles = StyleSheet.create({
   errors: {
     color: 'red',
     fontWeightL: 'bold',
-    marginHorizontal: 5,
+    marginHorizontal: '2%',
   },
   image: {
     flex: 1,
@@ -311,8 +310,8 @@ const styles = StyleSheet.create({
     flex: 0.8,
     fontSize: 1,
     justifyContent: 'space-between',
-    marginTop: 30,
-    width: 350,
+    marginTop: '10%',
+    width: '95%',
   },
   text: {
     fontSize: 40,
@@ -332,13 +331,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   label: {
-    margin: 2,
+    margin: '1%',
     color: 'white',
     fontWeight: 'bold',
     fontSize: 13,
   },
   buttontext: {
-    margin: 2,
+    margin: '1%',
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,

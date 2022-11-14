@@ -43,7 +43,7 @@ export const ButtonContianer = styled(View)`
   flex-direction: ${props => (props.arabic ? `row-reverse` : `row`)};
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 95%;
   text-align: end;
 `;
 export const HeadLine = styled(Text)`

@@ -41,7 +41,6 @@ import {SheetManager} from 'react-native-actions-sheet';
 
 import * as yup from 'yup';
 import {Chekcer} from '../utils/Redux/store/PassValid';
-import {Dropdown} from 'react-native-material-dropdown';
 
 const SignupSchema = yup.object().shape({
   displayName: yup.string().required('Userame Adress is required'),
@@ -172,7 +171,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 65,
+                    height: '10%',
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -204,7 +203,6 @@ const SignUp = ({navigation}) => {
                     </Text>
                   </Row>
                 )}
-                <Dropdown />
                 <Row
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -212,7 +210,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 65,
+                    height: '10%',
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -233,8 +231,8 @@ const SignUp = ({navigation}) => {
                     placeholderTextColor="#ffff"
                     color={'white'}
                     name="email"
-                    ب
                     value={props.values.email}
+                    onChangeText={props.handleChange('email')}
                   />
                 </Row>
                 {props.errors.email && props.touched.email && (
@@ -250,7 +248,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
 
                     width: '100%',
-                    height: 65,
+                    height: '10%',
                     border: 1.5,
                     borderRadius: 10,
                     alignItems: 'center',
@@ -284,7 +282,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
                     borderColor: '#007236',
                     width: '100%',
-                    height: 65,
+                    height: '10%',
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -329,7 +327,7 @@ const SignUp = ({navigation}) => {
                     borderWidth: 1.5,
                     borderColor: '#007236',
                     width: '100%',
-                    height: 65,
+                    height: '10%',
                   }}
                   arabic={lang.langArabic}>
                   <Image
@@ -429,7 +427,9 @@ const SignUp = ({navigation}) => {
                   </Column>
                 </Row>
 
-                <ButtonContianer arabic={lang.langArabic}>
+                <ButtonContianer
+                  arabic={lang.langArabic}
+                  style={{height: '8%'}}>
                   <StyledButton onPress={props.handleSubmit}>
                     {lang.langArabic ? (
                       <Text style={styles.buttontext}>سجل</Text>
@@ -441,9 +441,9 @@ const SignUp = ({navigation}) => {
                     style={{
                       backgroundColor: 'white',
                       borderRadius: 12,
-                      padding: 2,
-                      width: 50,
-                      height: 50,
+                      padding: '7%',
+                      width: '15%',
+                      height: '15%',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
@@ -501,7 +501,7 @@ const styles = StyleSheet.create({
   errors: {
     color: 'red',
     fontWeightL: 'bold',
-    marginHorizontal: 5,
+    marginHorizontal: '2%',
   },
   mode: {},
   image: {

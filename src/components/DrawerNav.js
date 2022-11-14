@@ -35,13 +35,13 @@ const DrawerNav = ({navigation}) => {
       <Drawer.Navigator
         drawerContent={props => <CustomDrawer {...props} />}
         drawerType="front"
-        edgeWidth={100}
+        edgeWidth={50}
         hideStatusBar={false}
         screenOptions={{
           drawerPosition: langArabic ? 'right' : 'left',
           headerLeft: () => (
             <TouchableOpacity
-              style={{margin: 14}}
+              style={{margin: '15%'}}
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
               <Image source={darkmode ? drawericond : drawericon} />
             </TouchableOpacity>
@@ -55,7 +55,7 @@ const DrawerNav = ({navigation}) => {
                   }}
                   style={styles.profilepic}
                 />
-                <Column style={{marginLeft: 10}}>
+                <Column style={{marginLeft: '10%'}}>
                   <Text
                     style={{fontSize: 16, color: darkmode ? 'white' : 'black'}}>
                     {langArabic ? 'صباح الخير' : 'Good morning'}
@@ -76,7 +76,7 @@ const DrawerNav = ({navigation}) => {
           drawerItemStyle: {borderRadius: 13},
           headerShown: true,
           drawerLabelStyle: {
-            marginLeft: -25,
+            marginLeft: '-25%',
           },
           headerStyle: {
             backgroundColor: darkmode ? dark.bg : light.bg,
@@ -382,10 +382,9 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    marginStart: 50,
-    width: 345,
+    marginStart: '10%',
+    width: '145%',
     justifyContent: 'space-between',
-    backgroundColor: 'transparent',
   },
 });
 export default DrawerNav;
