@@ -1,6 +1,6 @@
 # NBE-App
 a clone for NBE bank app
-implemented features:
+implemented features:<br />
  1-swipables<br />
  2-firebase authentication<br />
  3-google maps and places api<br />
